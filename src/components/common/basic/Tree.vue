@@ -39,233 +39,223 @@ export default {
       default: true, //是否自动展开选中的节点，默认是
     },
     titleName: "", //标题名称
-//树的列表，每个元素必须包含id,和name元素，其中有子节点的必须包含children子列表
-            data:{
-            type:Array,
-            default:function(){
-                return[
-                    {
-                        name:'一级节点1',
-                        id:1,
-                        isSelect:true,
-                        children:[
-                            {
-                                name:'二级节点11',
-                                id:11,
-                                children:[
-                                    {
-                                        name:'三级节点111',
-                                        id:111,
-                                    },
-                                    {
-                                        name:'三级节点112',
-                                        id:112,
-                                    }
-                                ]
-                            },
-                            {
-                                name:'二级节点12',
-                                id:12,
-                                children:[
-                                    {
-                                        name:'三级节点121',
-                                        id:121,
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        name:'一级节点2',
-                        id:2,
-                        isSelect:false,
-                        children:[
-                            {
-                                name:'二级节点21',
-                                id:21,
-                                children:[
-                                    {
-                                        name:'三级节点211',
-                                        id:211,
-                                    },
-                                    {
-                                        name:'三级节点212',
-                                        id:212,
-                                    }
-                                ]
-                            },
-                            {
-                                name:'二级节点22',
-                                id:22,
-                                
-                            }
-                        ]
-                    },
-                    {
-                        name:'一级节点3',
-                        id:3,
-                        
-                    },
-                    {
-                        name:'一级节点4',
-                        id:4,
-                        isSelect:false,
-                        children:[
-                            {
-                                name:'二级节点41',
-                                id:41,
-                                children:[
-                                    {
-                                        name:'三级节点411',
-                                        id:411,
-                                    },
-                                    {
-                                        name:'三级节点412',
-                                        id:412,
-                                        children:[
-                                            {
-                                                name:'四级节点4121',
-                                                id:4121
-                                            },
-                                            {
-                                                name:'四级节点4122',
-                                                id:4122
-                                            },
-                                            {
-                                                name:'四级节点4123',
-                                                id:4123
-                                            },
-                                            {
-                                                name:'四级节点4124',
-                                                id:4124
-                                            },
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                name:'二级节点42',
-                                id:42,
-                                
-                            }
-                        ]
-                    },
-                    {
-                        name:'一级节点5',
-                        id:5,
-                        isSelect:false,
-                        children:[
-                            {
-                                name:'二级节点51',
-                                id:51,
-                                children:[
-                                    {
-                                        name:'三级节点511',
-                                        id:511,
-                                    },
-                                    {
-                                        name:'三级节点512',
-                                        id:512,
-                                        children:[
-                                            {
-                                                name:'四级节点5121',
-                                                id:5121,
-                                            },
-                                            {
-                                                name:'四级节点5122',
-                                                id:5122,
-                                            },
-                                            {
-                                                name:'四级节点5123',
-                                                id:5123,
-                                            },
-                                            {
-                                                name:'四级节点5124',
-                                                id:5124,
-                                            },
-                                            {
-                                                name:'四级节点5125',
-                                                id:5125,
-                                            },
-
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                name:'二级节点22',
-                                id:22,
-                                
-                            }
-                        ]
-                    },
-                    {
-                        name:'一级节点6',
-                        id:6,
-                        
-                    },
-                    {
-                        name:'一级节点7',
-                        id:7,
-                        
-                    },
-                    {
-                        name:'一级节点8',
-                        id:8,
-                        
-                    },
-                    {
-                        name:'一级节点9',
-                        id:9,
-                        isSelect:false,
-                        children:[
-                            {
-                                name:'二级节点91',
-                                id:91,
-                                children:[
-                                    {
-                                        name:'三级节点911',
-                                        id:911,
-                                    },
-                                    {
-                                        name:'三级节点912',
-                                        id:912,
-                                        children:[
-                                            {
-                                                name:'四级节点9121',
-                                                id:9121,
-                                            },
-                                            {
-                                                name:'四级节点9122',
-                                                id:9122,
-                                            },
-                                            {
-                                                name:'四级节点9123',
-                                                id:9123,
-                                            },
-                                            {
-                                                name:'四级节点9124',
-                                                id:9124,
-                                            },
-                                            {
-                                                name:'四级节点9125',
-                                                id:9125,
-                                            },
-
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                name:'二级节点22',
-                                id:22,
-                                
-                            }
-                        ]
-                    },
-                ]
-            }
-        }
+    //树的列表，每个元素必须包含id,和name元素，其中有子节点的必须包含children子列表
+    data: {
+      type: Array,
+      default: function () {
+        return [
+          {
+            name: "一级节点1",
+            id: 1,
+            isSelect: true,
+            children: [
+              {
+                name: "二级节点11",
+                id: 11,
+                children: [
+                  {
+                    name: "三级节点111",
+                    id: 111,
+                  },
+                  {
+                    name: "三级节点112",
+                    id: 112,
+                  },
+                ],
+              },
+              {
+                name: "二级节点12",
+                id: 12,
+                children: [
+                  {
+                    name: "三级节点121",
+                    id: 121,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            name: "一级节点2",
+            id: 2,
+            isSelect: false,
+            children: [
+              {
+                name: "二级节点21",
+                id: 21,
+                children: [
+                  {
+                    name: "三级节点211",
+                    id: 211,
+                  },
+                  {
+                    name: "三级节点212",
+                    id: 212,
+                  },
+                ],
+              },
+              {
+                name: "二级节点22",
+                id: 22,
+              },
+            ],
+          },
+          {
+            name: "一级节点3",
+            id: 3,
+          },
+          {
+            name: "一级节点4",
+            id: 4,
+            isSelect: false,
+            children: [
+              {
+                name: "二级节点41",
+                id: 41,
+                children: [
+                  {
+                    name: "三级节点411",
+                    id: 411,
+                  },
+                  {
+                    name: "三级节点412",
+                    id: 412,
+                    children: [
+                      {
+                        name: "四级节点4121",
+                        id: 4121,
+                      },
+                      {
+                        name: "四级节点4122",
+                        id: 4122,
+                      },
+                      {
+                        name: "四级节点4123",
+                        id: 4123,
+                      },
+                      {
+                        name: "四级节点4124",
+                        id: 4124,
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                name: "二级节点42",
+                id: 42,
+              },
+            ],
+          },
+          {
+            name: "一级节点5",
+            id: 5,
+            isSelect: false,
+            children: [
+              {
+                name: "二级节点51",
+                id: 51,
+                children: [
+                  {
+                    name: "三级节点511",
+                    id: 511,
+                  },
+                  {
+                    name: "三级节点512",
+                    id: 512,
+                    children: [
+                      {
+                        name: "四级节点5121",
+                        id: 5121,
+                      },
+                      {
+                        name: "四级节点5122",
+                        id: 5122,
+                      },
+                      {
+                        name: "四级节点5123",
+                        id: 5123,
+                      },
+                      {
+                        name: "四级节点5124",
+                        id: 5124,
+                      },
+                      {
+                        name: "四级节点5125",
+                        id: 5125,
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                name: "二级节点22",
+                id: 22,
+              },
+            ],
+          },
+          {
+            name: "一级节点6",
+            id: 6,
+          },
+          {
+            name: "一级节点7",
+            id: 7,
+          },
+          {
+            name: "一级节点8",
+            id: 8,
+          },
+          {
+            name: "一级节点9",
+            id: 9,
+            isSelect: false,
+            children: [
+              {
+                name: "二级节点91",
+                id: 91,
+                children: [
+                  {
+                    name: "三级节点911",
+                    id: 911,
+                  },
+                  {
+                    name: "三级节点912",
+                    id: 912,
+                    children: [
+                      {
+                        name: "四级节点9121",
+                        id: 9121,
+                      },
+                      {
+                        name: "四级节点9122",
+                        id: 9122,
+                      },
+                      {
+                        name: "四级节点9123",
+                        id: 9123,
+                      },
+                      {
+                        name: "四级节点9124",
+                        id: 9124,
+                      },
+                      {
+                        name: "四级节点9125",
+                        id: 9125,
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                name: "二级节点22",
+                id: 22,
+              },
+            ],
+          },
+        ];
+      },
+    },
     initialSelect: [], //加载页面时选中的元素
   },
   data() {
