@@ -33,6 +33,10 @@ export default {
   components: {
     TreeNode,
   },
+  methods: {},
+  created() {
+    this.isOpen = this.data.childSelected;
+  },
 };
 </script>
 
