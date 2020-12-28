@@ -38,9 +38,9 @@ export default {
       type: Boolean,
       default: true, //是否自动展开选中的节点，默认是
     },
-    titleName: "", //标题名称
+    title: "", //标题名称
     //树的列表，每个元素必须包含id,和name元素，其中有子节点的必须包含children子列表
-    data: {
+    pData: {
       type: Array,
       default: function () {
         return [
@@ -327,7 +327,7 @@ export default {
     },
   },
   created() {
-    this.initData(this.data);
+    this.initData(this.pData);
   },
   mounted() {},
 };

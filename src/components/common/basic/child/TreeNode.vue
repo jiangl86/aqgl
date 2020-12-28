@@ -21,7 +21,7 @@ import TreeNode from "./TreeNode";
 export default {
   name: "TreeNode",
   props: {
-    data: {
+    pData: {
       type: Object,
     },
   },
@@ -30,12 +30,17 @@ export default {
       isOpen: false,
     };
   },
+  computed: {
+    isFolder() {
+      return this.pData.children && this.pData.children.length > 0;
+    },
+  },
   components: {
     TreeNode,
   },
   methods: {},
   created() {
-    this.isOpen = this.data.childSelected;
+    this.isOpen = this.pData.childSelected;
   },
 };
 </script>
