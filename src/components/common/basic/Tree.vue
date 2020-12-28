@@ -1,6 +1,6 @@
 <template>
   <div class="tree">
-    <TopNav :name="name"></TopNav>
+    <TopNav :name="name" @back="back" @save="save"></TopNav>
     <za-input
       v-if="showSearch"
       suffixIcon="el-icon-search"
@@ -20,7 +20,15 @@
         ></TreeNode>
       </ul>
     </Scroll>
-    <div ref="aa"></div>
+    <div v-if="showSelected" class="selected-info" @click="showSelectedNode">
+      {{ selectedInfo }}
+      <!-- <za-tree name="已选择内容"></za-tree> -->
+    </div>
+    <!-- <transition name="move">
+      <div class="selected-div" v-show="showSelectedTree">
+
+      </div>
+    </transition> -->
   </div>
 </template>
 
@@ -296,7 +304,13 @@ export default {
     return {
       selected: [],
       refresh: null,
+      showSelectedTree: false,
     };
+  },
+  computed: {
+    selectedInfo() {
+      return "已选择" + this.selected.length + "项";
+    },
   },
   components: {
     Scroll,
@@ -563,6 +577,11 @@ export default {
     recover() {
       this.recoverShowState(this.pData);
     },
+
+    //显示已选择的数列表
+    showSelectedNode() {
+      this.showSelectedTree = !this.showSelectedTree;
+    },
   },
   created() {
     this.initData(this.pData);
@@ -578,6 +597,7 @@ export default {
       this.refresh();
     });
     this.$bus.$on("nodeClick", (node) => {
+      console.log("dsds");
       this.nodeClick(node);
     });
     console.log(window.getComputedStyle(this.$refs.scroll.$el).height);
@@ -603,5 +623,36 @@ export default {
   margin-top: 44px;
   height: calc(100vh - 44px);
   overflow: hidden;
+}
+.selected-info {
+  height: var(--liHeight);
+  line-height: var(--liHeight);
+  background-color: #fff5ec;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
+.selected-div {
+  position: absolute;
+  left: 10vw;
+  top: 0;
+  width: 90vw;
+  height: 100%;
+  background-color: lightblue;
+}
+.move-enter-active {
+  transition: all 0.5s linear;
+  transform: translate3d(0, 0, 0);
+}
+.move-leave-active {
+  transition: all 0.5s linear;
+  transform: translate3d(100%, 0, 0);
+}
+.move-enter {
+  transform: translate3d(100%, 0, 0);
+}
+.move-leave {
+  transform: translate3d(0, 0, 0);
 }
 </style>

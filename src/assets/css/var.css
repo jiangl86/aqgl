@@ -11,4 +11,6 @@
     --mainColor: #406dfc;
     /* 输入框高度 */
     --inputHeight: 30px;
+    /* 普通li高度 */
+    --liHeight: 40px;
 }
