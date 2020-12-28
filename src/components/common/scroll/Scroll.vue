@@ -47,10 +47,11 @@ export default {
     BScroll,
   },
   methods: {
-    scrollT0(x, y, time = 300) {
-      this.scroll && this.scroll.scrollT0(x, y, time);
+    scrollTo(x, y, time = 300) {
+      this.scroll && this.scroll.scrollTo(x, y, time);
     },
     refresh() {
+      console.log("refresh");
       this.scroll && this.scroll.refresh();
     },
     finishPullDown() {

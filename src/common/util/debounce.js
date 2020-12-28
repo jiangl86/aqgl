@@ -1,5 +1,5 @@
-export default function debounce(func, delay = 300) {
-    var timer = null;
+export default function debounce(func, delay = 200) {
+    let timer = null;
     return function(...args) {
         if (timer != null) {
             clearTimeout(timer)

@@ -1,46 +1,44 @@
 <template>
   <div class="about">
-    <Scroll class="scroll" ref="scroll" pullUpload pullDownRefresh>
-      <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>7</li>
-        <li>8</li>
-        <li>9</li>
-        <li>10</li>
-        <li>11</li>
-        <li>12</li>
-        <li>13</li>
-        <li>1</li>
-        <li>14</li>
-        <li>15</li>
-        <li>16</li>
-        <li>17</li>
-        <li>18</li>
-        <li>19</li>
-      </ul>
-    </Scroll>
+    <za-tree
+      name="部门选择"
+      :initialSelect="selected"
+      :multiSelect="true"
+      chainSelect
+      showSearch
+      showSelected
+    ></za-tree>
+    <!-- <za-input prefixIcon="el-icon-date"></za-input> -->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Scroll from "@/components/common/scroll/Scroll";
+import ZaTree from "components/common/basic/Tree";
+import ZaInput from "components/common/basic/Input";
 
 export default {
   name: "Home",
-  // data: {},
+  data() {
+    return {
+      selected: [
+        // {
+        //   name: "二级节点11",
+        //   id: 11,
+        // },
+        {
+          name: "四级节点5125",
+          id: 5125,
+        },
+      ],
+    };
+  },
   components: {
-    Scroll,
+    ZaTree,
+    ZaInput,
   },
   methods: {},
-  mounted() {
-    this.$refs.scroll.refresh();
-  },
+  mounted() {},
 };
 </script>
 <style scoped>

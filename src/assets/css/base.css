@@ -2,7 +2,7 @@
 @import 'var.css';
 body {
     padding: 0;
-    font-size: var(--contentFontSize);
+    font-size: var(--normalSize);
     background-color: #F4F4F4;
 }
 
@@ -28,7 +28,7 @@ input[type=password],
 select {
     outline: none;
     border: 1px solid #ccc;
-    height: 25px;
+    height: var(--inputHeight);
     border-radius: 3px;
 }
 
@@ -41,3 +41,15 @@ textarea {
 button {
     outline: none;
 }
+
+
+/* 调整elementui部分样式 */
+
+.el-input__icon {
+    line-height: var(--inputHeight) !important;
+}
+
+
+/* .el-input__inner {
+    padding: 0 10px !important;
+} */

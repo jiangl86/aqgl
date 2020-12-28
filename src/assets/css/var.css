@@ -1,10 +1,14 @@
 :root {
-    --biggerSize: 20px;
     /*大字体，主要用于导航栏名称*/
-    --bigSize: 16px;
+    --biggerSize: 20px;
     /*强调性文件，大一号字体，一般用于各类列表标题名称*/
-    --normalSize: 14px;
+    --bigSize: 16px;
     /*正常字体，用于各类正文文字*/
-    --smallSize: 12px;
+    --normalSize: 14px;
     /*小字体，一般用于各类提示性文字*/
+    --smallSize: 12px;
+    /* 系统主要颜色 */
+    --mainColor: #406dfc;
+    /* 输入框高度 */
+    --inputHeight: 30px;
 }
