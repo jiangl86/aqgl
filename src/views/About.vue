@@ -16,7 +16,7 @@
 <script>
 // @ is an alias to /src
 import ZaTree from "components/common/basic/Tree";
-import ZaInput from "components/common/basic/Input";
+import ZaInput from "components/common/basic/ZaInput";
 
 export default {
   name: "Home",

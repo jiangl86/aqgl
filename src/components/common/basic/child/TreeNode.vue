@@ -8,16 +8,13 @@
             :key="pData.id + index"
             class="left-indent"
           ></span
-          ><i v-if="isFolder && isOpen" class="open el-icon-remove-outline"></i
-          ><i
-            v-else-if="isFolder && !isOpen"
-            class="close el-icon-circle-plus-outline"
-          ></i
+          ><i v-if="isFolder && isOpen" class="open cubeic-select"></i
+          ><i v-else-if="isFolder && !isOpen" class="close cubeic-arrow"></i
           ><i v-else class="open-icon"></i>
         </div>
         <div class="info" @click="nodeSelect">
           {{ pData.name
-          }}<span v-show="pData.selected" class="el-icon-check"></span>
+          }}<span v-show="pData.selected" class="cubeic-ok"></span>
         </div>
       </div>
       <ul v-if="pData.children" v-show="isOpen">

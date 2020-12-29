@@ -30,7 +30,10 @@
 import Scroll from "components/common/scroll/Scroll";
 import TreeNode from "./child/TreeNode";
 import TopNav from "components/common/nav/TopNav";
-import ZaInput from "components/common/basic/Input";
+import ZaInput from "components/common/basic/ZaInput";
+
+//引入js方法
+import { showDialog } from "components/common/basic/ZaDialog";
 
 import debounce from "common/util/debounce";
 
@@ -642,16 +645,24 @@ export default {
 
     back() {
       if (this.backTip) {
-        this.$confirm("是否确认取消", "提示");
+        showDialog(this, "提示信息", "所选择的内容未保存，是否确认返回！").then(
+          (result) => {
+            if (result == "ok") {
+              this.selected.forEach((ele) => {
+                ele.selected = false;
+                ele.childSelected = false;
+              });
+              this.selected = [];
+            }
+            this.$emit("back");
+          }
+        );
       }
-      this.selected.forEach((ele) => {
-        ele.selected = false;
-        ele.childSelected = false;
-      });
-      this.selected = [];
     },
 
-    save() {},
+    save() {
+      this.$emit("save");
+    },
   },
   created() {
     this.initData(this.pData);

@@ -1,7 +1,7 @@
 <template>
   <div class="top-nav">
     <div class="back-btn" v-if="showBack" @click="back">
-      <slot name="back-btn"><i class="el-icon-arrow-left"></i></slot>
+      <slot name="back-btn"><i class="cubeic-back"></i></slot>
     </div>
     <div class="func-name">{{ name }}</div>
     <div class="func-actions">
