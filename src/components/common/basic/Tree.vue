@@ -1,6 +1,6 @@
 <template>
   <div class="tree">
-    <TopNav :name="name" @back="back" @save="save"></TopNav>
+    <TopNav :name="name" @back="back" @save="save" :backTip="true"></TopNav>
     <za-input
       v-if="showSearch"
       suffixIcon="el-icon-search"
@@ -20,15 +20,9 @@
         ></TreeNode>
       </ul>
     </Scroll>
-    <div v-if="showSelected" class="selected-info" @click="showSelectedNode">
+    <div v-if="showSelected" class="selected-info" @click="showSelectedDiv">
       {{ selectedInfo }}
-      <!-- <za-tree name="已选择内容"></za-tree> -->
     </div>
-    <!-- <transition name="move">
-      <div class="selected-div" v-show="showSelectedTree">
-
-      </div>
-    </transition> -->
   </div>
 </template>
 
@@ -66,6 +60,11 @@ export default {
     autoExpandSelect: {
       type: Boolean,
       default: true, //是否自动展开选中的节点，默认是
+    },
+    //点击返回时，是否由上级处理还是直接返回
+    backTip: {
+      type: Boolean,
+      default: false,
     },
     //标题名称
     name: "",
@@ -309,7 +308,9 @@ export default {
   },
   computed: {
     selectedInfo() {
-      return "已选择" + this.selected.length + "项";
+      return this.showSelectedTree
+        ? "返回选择列表"
+        : "已选择" + this.selected.length + "项";
     },
   },
   components: {
@@ -348,32 +349,40 @@ export default {
 
     //初始化样式
     initStyle() {
-      let height = Number(
-        window.getComputedStyle(this.$refs.scroll.$el).height.replace("px", "")
-      );
       let marginTop = Number(
         window
           .getComputedStyle(this.$refs.scroll.$el)
           .marginTop.replace("px", "")
       );
       if (this.showSearch) {
-        height -= 30;
         marginTop = 0;
       }
-      if (this.showSelected) {
-        height -= 42;
-      }
+      let height = this.getScrollDivHeight();
       this.$refs.scroll.$el.style.height = height + "px";
       this.$refs.scroll.$el.style.marginTop = marginTop + "px";
     },
 
+    //获取scroll的高
+    getScrollDivHeight() {
+      let height = Number(
+        window.getComputedStyle(this.$refs.scroll.$el).height.replace("px", "")
+      );
+      if (this.showSearch) {
+        height -= 30;
+      }
+      if (this.showSelected) {
+        height -= 42;
+      }
+      return height;
+    },
+
     //获取节点及子节点选中状态，若未选中返回0，当前节点选中返回1，子节点（所有子节点）有选中的返回2，当前节点和子节点均选中返回3
-    getSelectState(item) {
-      if (this.initialSelect && this.initialSelect.length > 0) {
+    getSelectState(item, selectedList = this.initialSelect) {
+      if (selectedList && selectedList.length > 0) {
         let childState = 0;
         if (item.children) {
           for (let j = 0; j < item.children.length; j++) {
-            let state = this.getSelectState(item.children[j]);
+            let state = this.getSelectState(item.children[j], selectedList);
             if (state != 0) {
               childState = state;
               break;
@@ -381,8 +390,8 @@ export default {
           }
         }
         let i = 0;
-        for (; i < this.initialSelect.length; i++) {
-          if (item.id == this.initialSelect[i].id) {
+        for (; i < selectedList.length; i++) {
+          if (item.id == selectedList[i].id) {
             if (childState != 0) {
               return 3;
             } else {
@@ -390,7 +399,7 @@ export default {
             }
           }
         }
-        if (i == this.initialSelect.length) {
+        if (i == selectedList.length) {
           if (childState != 0) {
             return 2;
           } else {
@@ -408,9 +417,11 @@ export default {
       if (this.selected) {
         pos = this.getFirstSelectPos(this.pData);
         let yPos = pos * 41;
-        if (yPos > window.screen.availHeight - 44) {
+        let height = this.getScrollDivHeight();
+        if (yPos > height) {
           if (this.$refs.scroll) {
-            yPos = window.screen.availHeight - 44 - yPos;
+            yPos = height - yPos;
+
             this.$refs.scroll.scrollTo(0, yPos);
           }
         }
@@ -510,10 +521,13 @@ export default {
     },
 
     //根据搜索关键字,设置节点展示
-    setShowState(item, name) {
+    setNameShowState(item, name) {
+      if (this.showSelectedTree && !item.show) {
+        return;
+      }
       if (item.name.indexOf(name) != -1) {
         item.show = true;
-        if (item.children) {
+        if (item.children && !this.showSelectedTree) {
           this.recoverShowState(item.children);
         }
         return 1;
@@ -521,12 +535,37 @@ export default {
         let childState = 0;
         if (item.children) {
           for (let i = 0; i < item.children.length; i++) {
-            let state = this.setShowState(item.children[i], name);
+            let state = this.setNameShowState(item.children[i], name);
             if (state != 0) {
               childState = state;
             }
           }
         }
+        if (childState != 0) {
+          item.show = true;
+          return 2;
+        } else {
+          item.show = false;
+          return 0;
+        }
+      }
+    },
+
+    //根据已选择元素来展示列表
+    setSelectedShowState(item) {
+      let childState = 0;
+      if (item.children) {
+        for (let i = 0; i < item.children.length; i++) {
+          let state = this.setSelectedShowState(item.children[i]);
+          if (state != 0) {
+            childState = state;
+          }
+        }
+      }
+      if (item.selected) {
+        item.show = true;
+        return 1;
+      } else {
         if (childState != 0) {
           item.show = true;
           return 2;
@@ -555,7 +594,7 @@ export default {
           break;
         }
       }
-      if (!exist) {
+      if (!exist && !this.showSelectedTree) {
         this.pushToSelected(item);
       }
     },
@@ -563,25 +602,56 @@ export default {
     //根据搜素关键字显示树
     search() {
       if (this.$refs.search.value.trim() != "") {
+        //如果是展示的已选择列表，则每次搜素前，初始化已选择树列表，否则搜索会出问题
+        if (this.showSelectedTree) {
+          for (let i = 0; i < this.pData.length; i++) {
+            this.setSelectedShowState(this.pData[i]);
+          }
+        }
+        //按名称进行搜索
         let name = this.$refs.search.value.trim();
         for (let i = 0; i < this.pData.length; i++) {
-          this.setShowState(this.pData[i], name);
+          this.setNameShowState(this.pData[i], name);
         }
       }
       //取消搜索结果
       else {
-        this.recoverShowState(this.pData);
+        this.recover();
       }
     },
     //恢复完整树显示
     recover() {
       this.recoverShowState(this.pData);
+      this.showSelectedTree = false;
+      this.$refs.search.value = "";
     },
 
     //显示已选择的数列表
-    showSelectedNode() {
+    showSelectedDiv() {
       this.showSelectedTree = !this.showSelectedTree;
+      if (this.showSelectedTree) {
+        for (let i = 0; i < this.pData.length; i++) {
+          this.setSelectedShowState(this.pData[i]);
+        }
+      }
+      //展示完整树
+      else {
+        this.recover();
+      }
     },
+
+    back() {
+      if (this.backTip) {
+        this.$confirm("是否确认取消", "提示");
+      }
+      this.selected.forEach((ele) => {
+        ele.selected = false;
+        ele.childSelected = false;
+      });
+      this.selected = [];
+    },
+
+    save() {},
   },
   created() {
     this.initData(this.pData);
@@ -597,7 +667,6 @@ export default {
       this.refresh();
     });
     this.$bus.$on("nodeClick", (node) => {
-      console.log("dsds");
       this.nodeClick(node);
     });
     console.log(window.getComputedStyle(this.$refs.scroll.$el).height);
@@ -621,6 +690,7 @@ export default {
 }
 .scroll {
   margin-top: 44px;
+  width: 100vw;
   height: calc(100vh - 44px);
   overflow: hidden;
 }

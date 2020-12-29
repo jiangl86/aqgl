@@ -7,6 +7,7 @@
       chainSelect
       showSearch
       showSelected
+      backTip
     ></za-tree>
     <!-- <za-input prefixIcon="el-icon-date"></za-input> -->
   </div>

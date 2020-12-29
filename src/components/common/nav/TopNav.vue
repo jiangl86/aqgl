@@ -19,8 +19,8 @@ export default {
       type: Boolean,
       default: true,
     },
-    //点击返回时，是否由上级处理还是直接返回
-    backAction: {
+    //点击返回时，是否提示由上级处理还是直接返回
+    backTip: {
       type: Boolean,
       default: false,
     },
@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     back() {
-      if (this.backAction) {
+      if (this.backTip) {
         this.$emit("back");
       } else {
         this.$router.go(-1);
