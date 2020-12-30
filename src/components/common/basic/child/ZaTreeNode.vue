@@ -18,22 +18,22 @@
         </div>
       </div>
       <ul v-if="pData.children" v-show="isOpen">
-        <TreeNode
+        <ZaTreeNode
           v-for="child in pData.children"
           :pData="child"
           :key="child.id"
           :level="level + 1"
           :autoExpandSelect="autoExpandSelect"
-        ></TreeNode>
+        ></ZaTreeNode>
       </ul>
     </li>
   </div>
 </template>
 
 <script>
-import TreeNode from "./TreeNode";
+import ZaTreeNode from "./ZaTreeNode";
 export default {
-  name: "TreeNode",
+  name: "ZaTreeNode",
   props: {
     level: {
       type: Number,
@@ -58,7 +58,7 @@ export default {
     },
   },
   components: {
-    TreeNode,
+    ZaTreeNode,
   },
   methods: {
     toggle() {

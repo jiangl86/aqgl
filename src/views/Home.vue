@@ -17,6 +17,11 @@ export default {
   components: {
     HelloWorld,
   },
-  mounted() {},
+  mounted() {
+    this.$loading.showLoading();
+    setTimeout(() => {
+      this.$loading.hideLoading();
+    }, 2000);
+  },
 };
 </script>

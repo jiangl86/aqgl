@@ -1,37 +1,38 @@
 <template>
-  <div class="za-input">
-    <cube-input
+  <div class="za-textarea">
+    <cube-textarea
       :placeholder="placeholder"
-      :type="type"
       v-model="value"
       :maxlength="maxlength"
-      :clearable="clearable"
+      :indicator="indicator"
+      :autoExpand="autoExpand"
       :readonly="readonly"
       :disabled="disabled"
       @focus="focus"
       @blur="blur"
-      @change="change"
       @input="input"
-    ></cube-input>
+      ref="textarea"
+    ></cube-textarea>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ZaInput",
+  name: "ZaTextarea",
   props: {
-    placeholder: "",
-    type: {
-      type: String,
-      default: "text", //支持text/number/password/date
-    },
+    placeholder: "请输入",
     maxlength: {
       type: Number,
-      default: 100,
+      default: 500,
     },
-    clearable: {
+    showReamin: {
       type: Boolean,
-      default: true,
+      default: false,
+    },
+    autoExpand: {
+      type: Boolean,
+      default: false,
     },
     readonly: {
       type: Boolean,
@@ -46,6 +47,8 @@ export default {
   data() {
     return {
       value: this.initialValue,
+      indicator: { remain: this.showReamin },
+      initialHeight: 0,
     };
   },
   components: {},
@@ -58,29 +61,24 @@ export default {
     blur() {
       this.$emit("blur");
     },
-    //绑定值改变且输入框失去焦点后触发
-    change() {
-      this.$emit("change");
-    },
     //绑定值变化时触发
     input() {
-      if (this.value == "") {
-        this.clear();
-      } else {
-        this.$emit("input");
+      let height = this.$refs.textarea.$el.children[0].scrollHeight;
+      console.log(height);
+      //   console.log(this.$refs.textarea.$el.style.height);
+      console.log(this.initialHeight + "sdsd");
+      if (height > this.initialHeight) {
+        this.$refs.textarea.$el.style.height = height + "px";
       }
-    },
 
-    //清空数据时触发
-    clear() {
-      this.$emit("clear");
+      this.$emit("input");
     },
+  },
+  mounted() {
+    this.initialHeight = this.$refs.textarea.$el.children[0].scrollHeight;
   },
 };
 </script>
 
 <style scoped>
-.za-input {
-  flex: 1;
-}
 </style>

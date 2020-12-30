@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "TopNav",
+  name: "ZaTopNav",
   props: {
     name: "",
     showBack: {

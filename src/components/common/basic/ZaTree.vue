@@ -1,6 +1,11 @@
 <template>
   <div class="tree">
-    <TopNav :name="name" @back="back" @save="save" :backTip="true"></TopNav>
+    <ZaTopNav
+      :name="name"
+      @back="cancel"
+      @save="assert"
+      :backTip="true"
+    ></ZaTopNav>
     <za-input
       v-if="showSearch"
       suffixIcon="el-icon-search"
@@ -10,16 +15,16 @@
       @keyup.native.13="search"
       @clear="recover"
     ></za-input>
-    <Scroll ref="scroll" class="scroll">
+    <ZaScroll ref="scroll" class="scroll">
       <ul>
-        <TreeNode
+        <ZaTreeNode
           v-for="item in pData"
           :pData="item"
           :key="item.id"
           :autoExpandSelect="autoExpandSelect"
-        ></TreeNode>
+        ></ZaTreeNode>
       </ul>
-    </Scroll>
+    </ZaScroll>
     <div v-if="showSelected" class="selected-info" @click="showSelectedDiv">
       {{ selectedInfo }}
     </div>
@@ -27,22 +32,27 @@
 </template>
 
 <script>
-import Scroll from "components/common/scroll/Scroll";
-import TreeNode from "./child/TreeNode";
-import TopNav from "components/common/nav/TopNav";
+import ZaScroll from "components/common/scroll/ZaScroll";
+import ZaTreeNode from "./child/ZaTreeNode";
+import ZaTopNav from "components/common/nav/ZaTopNav";
 import ZaInput from "components/common/basic/ZaInput";
 
 //引入js方法
-import { showDialog } from "components/common/basic/ZaDialog";
+import { showDialog } from "components/common/popup/ZaDialog";
+import { showToast } from "components/common/popup/ZaToast";
 
 import debounce from "common/util/debounce";
 
 export default {
-  name: "Tree",
+  name: "ZaTree",
   props: {
     multiSelect: {
       type: Boolean,
       default: false, //是否支持多选，默认为否
+    },
+    selectAssert: {
+      type: Boolean,
+      default: false, //是否支持点击就确认，仅单选时支持
     },
     chainSelect: {
       type: Boolean,
@@ -317,9 +327,9 @@ export default {
     },
   },
   components: {
-    Scroll,
-    TreeNode,
-    TopNav,
+    ZaScroll,
+    ZaTreeNode,
+    ZaTopNav,
     ZaInput,
   },
   methods: {
@@ -597,8 +607,14 @@ export default {
           break;
         }
       }
-      if (!exist && !this.showSelectedTree) {
+      //如果是单选且设置为选择及确认
+      if (!this.multiSelect && this.selectAssert) {
         this.pushToSelected(item);
+        this.assert();
+      } else {
+        if (!exist && !this.showSelectedTree) {
+          this.pushToSelected(item);
+        }
       }
     },
 
@@ -643,7 +659,7 @@ export default {
       }
     },
 
-    back() {
+    cancel() {
       if (this.backTip) {
         showDialog(this, "提示信息", "所选择的内容未保存，是否确认返回！").then(
           (result) => {
@@ -654,14 +670,15 @@ export default {
               });
               this.selected = [];
             }
-            this.$emit("back");
+            this.$emit("cancel");
           }
         );
       }
     },
 
-    save() {
-      this.$emit("save");
+    assert() {
+      showToast(this, "点击了保存", "txt");
+      this.$emit("assert");
     },
   },
   created() {

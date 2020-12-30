@@ -1,9 +1,10 @@
 <template>
-  <div class="za-input">
-    <cube-input
+  <div class="input-with-label">
+    <label for="">{{ label }}</label>
+    <za-input
       :placeholder="placeholder"
       :type="type"
-      v-model="value"
+      :initialValue="initialValue"
       :maxlength="maxlength"
       :clearable="clearable"
       :readonly="readonly"
@@ -12,14 +13,21 @@
       @blur="blur"
       @change="change"
       @input="input"
-    ></cube-input>
+      @clear="clear"
+      class="za-input"
+    ></za-input>
   </div>
 </template>
 
 <script>
+import ZaInput from "components/common/basic/ZaInput";
 export default {
-  name: "ZaInput",
+  name: "InputWithLabel",
   props: {
+    label: {
+      type: String,
+      required: true,
+    },
     placeholder: "",
     type: {
       type: String,
@@ -44,11 +52,11 @@ export default {
     initialValue: "",
   },
   data() {
-    return {
-      value: this.initialValue,
-    };
+    return {};
   },
-  components: {},
+  components: {
+    ZaInput,
+  },
   methods: {
     //输入框聚焦后触发此事件，如果禁用状态，则不触发
     focus() {
@@ -80,7 +88,9 @@ export default {
 </script>
 
 <style scoped>
-.za-input {
-  flex: 1;
+.input-with-label {
+  display: flex;
+  flex-direction: row;
+  /* width: 100%; */
 }
 </style>
