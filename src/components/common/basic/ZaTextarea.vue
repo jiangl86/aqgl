@@ -32,7 +32,7 @@ export default {
     },
     autoExpand: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     readonly: {
       type: Boolean,
@@ -49,10 +49,23 @@ export default {
       value: this.initialValue,
       indicator: { remain: this.showReamin },
       initialHeight: 0,
+      numPerRow: 0,
+      rowHeight: 0,
     };
   },
   components: {},
   methods: {
+    // c初始化每行能显示的字符数量
+    initNumOfRow() {
+      let width = window
+        .getComputedStyle(this.$refs.textarea.$el)
+        .width.replace("px", "");
+      const styles = getComputedStyle(document.querySelector(":root"));
+      let fontSize = String(styles.getPropertyValue("--normalSize"))
+        .trim()
+        .replace("px", "");
+      this.numPerRow = Math.floor((width - 20) / fontSize);
+    },
     //输入框聚焦后触发此事件，如果禁用状态，则不触发
     focus() {
       this.$emit("focus");
@@ -62,23 +75,38 @@ export default {
       this.$emit("blur");
     },
     //绑定值变化时触发
-    input() {
-      let height = this.$refs.textarea.$el.children[0].scrollHeight;
-      console.log(height);
-      //   console.log(this.$refs.textarea.$el.style.height);
-      console.log(this.initialHeight + "sdsd");
-      if (height > this.initialHeight) {
-        this.$refs.textarea.$el.style.height = height + "px";
+    input(value) {
+      //调整控件高度
+      if (this.autoExpand) {
+        let height = this.$refs.textarea.$el.children[0].scrollHeight;
+        let rows =
+          Math.ceil(this.value.length / this.numPerRow) +
+          this.value.split("/n").length -
+          1;
+        if (height > this.initialHeight && this.rowHeight == 0) {
+          this.rowHeight = (height - this.initialHeight) / (rows - 1);
+        }
+        if (rows >= 1 && this.rowHeight != 0) {
+          height = this.initialHeight + (rows - 1) * this.rowHeight;
+          console.log(height);
+          this.$refs.textarea.$el.style.height = height + "px";
+        }
       }
-
-      this.$emit("input");
+      this.$emit("input", value);
     },
   },
   mounted() {
     this.initialHeight = this.$refs.textarea.$el.children[0].scrollHeight;
+    this.initNumOfRow();
   },
 };
 </script>
 
-<style scoped>
+<style>
+.cube-textarea_expanded {
+  height: 40px;
+}
+.cube-textarea-wrapper {
+  font-size: var(--normalSize);
+}
 </style>

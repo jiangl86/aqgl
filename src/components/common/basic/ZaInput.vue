@@ -63,11 +63,11 @@ export default {
       this.$emit("change");
     },
     //绑定值变化时触发
-    input() {
+    input(value) {
       if (this.value == "") {
         this.clear();
       } else {
-        this.$emit("input");
+        this.$emit("input", value);
       }
     },
 

@@ -16,8 +16,24 @@
       :initialSelect="initialRisks"
       multiSelect
     ></ZaOptionPicker> -->
-    <za-textarea></za-textarea>
-    <input-with-label label="企业名称"></input-with-label>
+    <!-- <za-textarea></za-textarea> -->
+    <input-with-label name="企业名称"></input-with-label>
+    <input-with-label name="企业名称"></input-with-label>
+    <za-checkbox :option="option" initialValue="1"></za-checkbox>
+    <ZaCheckboxGroup
+      :options="options"
+      :initialSelected="initialSelected"
+    ></ZaCheckboxGroup>
+    <ZaRadioGroup
+      :options="options"
+      :initialSelected="initialSelected"
+    ></ZaRadioGroup>
+
+    <cube-upload
+      action=""
+      :simultaneous-uploads="1"
+      @files-added="filesAdded"
+    />
   </div>
 </template>
 
@@ -27,6 +43,10 @@ import ZaTree from "components/common/basic/ZaTree";
 import ZaInput from "components/common/basic/ZaInput";
 import ZaTextarea from "components/common/basic/ZaTextarea";
 import ZaOptionPicker from "components/common/popup/ZaOptionPicker";
+
+import ZaCheckbox from "components/common/basic/ZaCheckbox";
+import ZaCheckboxGroup from "components/common/basic/ZaCheckboxGroup";
+import ZaRadioGroup from "components/common/basic/ZaRadioGroup";
 
 import InputWithLabel from "components/content/form/InputWithLabel";
 
@@ -72,6 +92,30 @@ export default {
           id: 3,
         },
       ],
+      option: {
+        label: "重大风险",
+        value: "1",
+      },
+      options: [
+        {
+          label: "重大风险",
+          value: "1",
+        },
+        {
+          label: "较大风险",
+          value: "2",
+        },
+        {
+          label: "一般风险",
+          value: "3",
+        },
+        {
+          label: "较小风险",
+          value: "4",
+        },
+      ],
+      initialSelected: [],
+      checkList: ["1"],
     };
   },
   components: {
@@ -80,6 +124,9 @@ export default {
     ZaOptionPicker,
     ZaTextarea,
     InputWithLabel,
+    ZaCheckbox,
+    ZaCheckboxGroup,
+    ZaRadioGroup,
   },
   methods: {},
   mounted() {},

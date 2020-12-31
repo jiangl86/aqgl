@@ -11,8 +11,8 @@
 //后期用一个方法来处理数据初始化
 // const styles = getComputedStyle(document.documentElement);
 const styles = getComputedStyle(document.querySelector(":root"));
-document.documentElement.style.setProperty("--contentFontSize", "20px");
-const value = String(styles.getPropertyValue("--contentFontSize")).trim();
+document.documentElement.style.setProperty("--normalSize", "20px");
+const value = String(styles.getPropertyValue("--normalSize")).trim();
 console.log(value);
 </script>
 <style>

@@ -1,6 +1,6 @@
 <template>
   <div class="input-with-label">
-    <label for="">{{ label }}</label>
+    <label @click="clickLabel">{{ name }}</label>
     <za-input
       :placeholder="placeholder"
       :type="type"
@@ -15,6 +15,7 @@
       @input="input"
       @clear="clear"
       class="za-input"
+      ref="input"
     ></za-input>
   </div>
 </template>
@@ -24,8 +25,8 @@ import ZaInput from "components/common/basic/ZaInput";
 export default {
   name: "InputWithLabel",
   props: {
-    label: {
-      type: String,
+    name: {
+      type: String, //标签名称
       required: true,
     },
     placeholder: "",
@@ -52,7 +53,9 @@ export default {
     initialValue: "",
   },
   data() {
-    return {};
+    return {
+      value: this.initialValue,
+    };
   },
   components: {
     ZaInput,
@@ -71,17 +74,19 @@ export default {
       this.$emit("change");
     },
     //绑定值变化时触发
-    input() {
-      if (this.value == "") {
-        this.clear();
-      } else {
-        this.$emit("input");
-      }
+    input(value) {
+      this.value = value;
+      this.$emit("input", value);
     },
 
     //清空数据时触发
     clear() {
       this.$emit("clear");
+    },
+
+    //点击标签使对应的输入框激活
+    clickLabel() {
+      this.$refs.input.$el.children[0].children[0].focus();
     },
   },
 };
