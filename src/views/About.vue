@@ -24,16 +24,29 @@
       :options="options"
       :initialSelected="initialSelected"
     ></ZaCheckboxGroup>
-    <ZaRadioGroup
-      :options="options"
-      :initialSelected="initialSelected"
-    ></ZaRadioGroup>
-
-    <cube-upload
+    <ZaRadioGroup :options="options" initialSelected=""></ZaRadioGroup>
+    <ZaDatePicker ref="aaa" type="datetime"></ZaDatePicker>
+    <div class="block">
+      <span class="demonstration">默认</span>
+      <el-date-picker v-model="value1" type="date" placeholder="选择日期">
+      </el-date-picker>
+    </div>
+    <div class="block">
+      <span class="demonstration">默认</span>
+      <el-date-picker
+        v-model="value1"
+        type="daterange"
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+      >
+      </el-date-picker>
+    </div>
+    <!-- <cube-upload
       action=""
       :simultaneous-uploads="1"
       @files-added="filesAdded"
-    />
+    /> -->
   </div>
 </template>
 
@@ -47,6 +60,8 @@ import ZaOptionPicker from "components/common/popup/ZaOptionPicker";
 import ZaCheckbox from "components/common/basic/ZaCheckbox";
 import ZaCheckboxGroup from "components/common/basic/ZaCheckboxGroup";
 import ZaRadioGroup from "components/common/basic/ZaRadioGroup";
+
+import ZaDatePicker from "components/common/popup/ZaDatePicker";
 
 import InputWithLabel from "components/content/form/InputWithLabel";
 
@@ -114,8 +129,9 @@ export default {
           value: "4",
         },
       ],
-      initialSelected: [],
+      initialSelected: ["1"],
       checkList: ["1"],
+      value1: "",
     };
   },
   components: {
@@ -127,9 +143,12 @@ export default {
     ZaCheckbox,
     ZaCheckboxGroup,
     ZaRadioGroup,
+    ZaDatePicker,
   },
   methods: {},
-  mounted() {},
+  mounted() {
+    // this.$refs.aaa.focus();
+  },
 };
 </script>
 <style scoped>

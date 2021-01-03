@@ -20,8 +20,7 @@ export default {
       required: true,
     },
     initialSelected: {
-      type: Array,
-      required: true,
+      type: String,
     },
     horizontal: {
       type: Boolean,

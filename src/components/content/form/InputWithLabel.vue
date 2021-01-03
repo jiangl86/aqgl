@@ -98,4 +98,7 @@ export default {
   flex-direction: row;
   /* width: 100%; */
 }
+label {
+  font-size: var(--normalSize);
+}
 </style>
