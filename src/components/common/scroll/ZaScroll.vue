@@ -35,6 +35,10 @@ export default {
       type: Boolean,
       default: false, //是否支持双击事件，默认为否
     },
+    probeType: {
+      type: Number,
+      default: 3,
+    },
   },
   data() {
     return {
@@ -49,6 +53,13 @@ export default {
   methods: {
     scrollTo(x, y, time = 300) {
       this.scroll && this.scroll.scrollTo(x, y, time);
+    },
+    scrollToElement(el, time = 300) {
+      this.scroll && this.scroll.scrollToElement(el, time, true, true);
+    },
+    stop() {
+      console.log(22);
+      this.scroll && this.scroll.stop();
     },
     refresh() {
       console.log("refresh");
@@ -67,7 +78,7 @@ export default {
     this.scroll = new BScroll(this.$refs.wrapper, {
       pullDownRefresh: this.pullDownRefresh,
       pullUpLoad: this.pullUpload,
-      probeType: 3,
+      probeType: this.probeType,
       click: true,
       dblclick: this.dblclick,
       scrollX: this.scrollX,
@@ -92,9 +103,11 @@ export default {
       this.$emit("scroll", position);
     });
     this.scroll.on("scrollEnd", (position) => {
-      console.log(position);
       this.$emit("scrollEnd", position);
     });
+    // this.scroll.on("touchEnd", (position) => {
+    //   this.$emit("touchEnd", position);
+    // });
   },
 };
 </script>

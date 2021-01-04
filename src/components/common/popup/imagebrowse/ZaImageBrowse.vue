@@ -3,9 +3,10 @@
     <ZaScroll
       scrollX
       dblclick
+      :probeType="2"
       ref="scroll"
       class="scroll"
-      @scrollEnd="scrollEnd"
+      @scrollEnd="touchEnd"
     >
       <div class="imgs">
         <img
@@ -86,26 +87,53 @@ export default {
     restoreWidth() {
       this.scale = 1;
       document.querySelector("img").style.width = this.initialWidth + "px";
+      this.$refs.scroll.refresh();
     },
     zoom() {
       this.scale += 0.2;
       let width = this.initialWidth * this.scale;
       this.setWidth(width);
     },
-    scrollEnd(position) {
+    touchEnd(position) {
       console.log(position);
+      console.log(this.scale);
+      console.log(this.currentIndex);
+      console.log(this.initialWidth);
 
-      if (position.x > -this.currentIndex * this.initialWidth + 160) {
+      if (position.x > (0.5 - this.currentIndex) * this.initialWidth) {
         this.currentIndex -= 1;
         this.$refs.scroll.scrollTo(this.currentIndex * this.initialWidth, 0);
         this.restoreWidth();
       } else if (
         position.x <
-        -this.currentIndex * this.initialWidth * this.scale + 160
+        (0.5 - this.currentIndex) * this.initialWidth -
+          this.initialWidth * this.scale
       ) {
         this.currentIndex += 1;
-        this.$refs.scroll.scrollTo(this.currentIndex * this.initialWidth, 0);
+        let x =
+          (1 - this.currentIndex) * this.initialWidth -
+          this.initialWidth * this.scale;
+        console.log(x);
+        this.$refs.scroll.scrollTo(x, 0);
+
         this.restoreWidth();
+      } else if (
+        position.x < (0.5 - this.currentIndex) * this.initialWidth &&
+        position.x > -this.currentIndex * this.initialWidth
+      ) {
+        this.$refs.scroll.scrollTo(-this.currentIndex * this.initialWidth, 0);
+      } else if (
+        position.x >
+          (0.5 - this.currentIndex) * this.initialWidth -
+            this.initialWidth * this.scale &&
+        position.x <
+          (1 - this.currentIndex) * this.initialWidth -
+            this.initialWidth * this.scale
+      ) {
+        let x =
+          (1 - this.currentIndex) * this.initialWidth -
+          this.initialWidth * this.scale;
+        this.$refs.scroll.scrollTo(x, 0);
       }
     },
   },
@@ -131,7 +159,8 @@ export default {
 }
 .scroll {
   width: 100vw;
-  overflow: scroll;
+  max-height: 100vh;
+  overflow: hidden;
   display: flex;
   position: absolute;
   left: 0;
