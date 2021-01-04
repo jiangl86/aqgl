@@ -9,7 +9,7 @@
       backTip
       selectAssert
     ></za-tree> -->
-    <za-input prefixIcon="el-icon-date"></za-input>
+    <!-- <za-input prefixIcon="el-icon-date"></za-input> -->
     <!-- <ZaOptionPicker
       name="风险等级"
       :pData="risks"
@@ -17,7 +17,7 @@
       multiSelect
     ></ZaOptionPicker> -->
     <!-- <za-textarea></za-textarea> -->
-    <input-with-label name="企业名称"></input-with-label>
+    <!-- <input-with-label name="企业名称"></input-with-label>
     <input-with-label name="企业名称"></input-with-label>
     <za-checkbox :option="option" initialValue="1"></za-checkbox>
     <ZaCheckboxGroup
@@ -30,23 +30,14 @@
       <span class="demonstration">默认</span>
       <el-date-picker v-model="value1" type="date" placeholder="选择日期">
       </el-date-picker>
-    </div>
-    <div class="block">
-      <span class="demonstration">默认</span>
-      <el-date-picker
-        v-model="value1"
-        type="daterange"
-        range-separator="至"
-        start-placeholder="开始日期"
-        end-placeholder="结束日期"
-      >
-      </el-date-picker>
-    </div>
+    </div> -->
+
     <!-- <cube-upload
       action=""
       :simultaneous-uploads="1"
       @files-added="filesAdded"
     /> -->
+    <ZaImageBrowse></ZaImageBrowse>
   </div>
 </template>
 
@@ -64,6 +55,8 @@ import ZaRadioGroup from "components/common/basic/ZaRadioGroup";
 import ZaDatePicker from "components/common/popup/ZaDatePicker";
 
 import InputWithLabel from "components/content/form/InputWithLabel";
+
+import ZaImageBrowse from "components/common/popup/imagebrowse/ZaImageBrowse";
 
 export default {
   name: "Home",
@@ -144,6 +137,7 @@ export default {
     ZaCheckboxGroup,
     ZaRadioGroup,
     ZaDatePicker,
+    ZaImageBrowse,
   },
   methods: {},
   mounted() {

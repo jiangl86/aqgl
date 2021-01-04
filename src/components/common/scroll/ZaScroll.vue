@@ -89,6 +89,11 @@ export default {
     this.scroll.on("scroll", (position) => {
       this.positionY = position.y;
       this.positionX = position.x;
+      this.$emit("scroll", position);
+    });
+    this.scroll.on("scrollEnd", (position) => {
+      console.log(position);
+      this.$emit("scrollEnd", position);
     });
   },
 };
@@ -99,7 +104,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .refresh {
