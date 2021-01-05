@@ -12,6 +12,9 @@
 
 <script>
 import BScroll from "better-scroll";
+// import Zoom from "@better-scroll/zoom";
+
+// BScroll.use(Zoom);
 export default {
   name: "Scroll",
   props: {
@@ -37,7 +40,11 @@ export default {
     },
     probeType: {
       type: Number,
-      default: 3,
+      default: 3, //决定是否派发 scroll 事件，对页面的性能有影响，尤其是在 useTransition 为 true 的模式下
+    },
+    momentum: {
+      type: Boolean,
+      default: true, //当快速在屏幕上滑动一段距离的时候，会根据滑动的距离和时间计算出动量，并生成滚动动画。设置为 true 则开启动画
     },
   },
   data() {
@@ -58,7 +65,6 @@ export default {
       this.scroll && this.scroll.scrollToElement(el, time, true, true);
     },
     stop() {
-      console.log(22);
       this.scroll && this.scroll.stop();
     },
     refresh() {
@@ -83,6 +89,7 @@ export default {
       dblclick: this.dblclick,
       scrollX: this.scrollX,
       scrollY: this.scrollY,
+      momentum: this.momentum,
     });
 
     if (this.pullUpload) {
@@ -105,9 +112,9 @@ export default {
     this.scroll.on("scrollEnd", (position) => {
       this.$emit("scrollEnd", position);
     });
-    // this.scroll.on("touchEnd", (position) => {
-    //   this.$emit("touchEnd", position);
-    // });
+    this.scroll.on("touchEnd", (position) => {
+      this.$emit("touchEnd", position);
+    });
   },
 };
 </script>

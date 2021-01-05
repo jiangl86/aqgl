@@ -37,7 +37,8 @@
       :simultaneous-uploads="1"
       @files-added="filesAdded"
     /> -->
-    <ZaImageBrowse></ZaImageBrowse>
+    <!-- <ZaImageBrowse></ZaImageBrowse> -->
+    <div @click="click">显示图片</div>
   </div>
 </template>
 
@@ -125,6 +126,11 @@ export default {
       initialSelected: ["1"],
       checkList: ["1"],
       value1: "",
+      imgs: [
+        "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3647099666,2758135680&fm=26&gp=0.jpg",
+        "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3353587742,1540290353&fm=26&gp=0.jpg",
+        "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2268108947,1773100229&fm=26&gp=0.jpg",
+      ],
     };
   },
   components: {
@@ -139,7 +145,11 @@ export default {
     ZaDatePicker,
     ZaImageBrowse,
   },
-  methods: {},
+  methods: {
+    click() {
+      this.$imageBrowse.showImg(this.imgs, 2);
+    },
+  },
   mounted() {
     // this.$refs.aaa.focus();
   },
