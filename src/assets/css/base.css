@@ -28,7 +28,7 @@ input[type=text],
 input[type=password],
 select {
     outline: none;
-    border: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
     height: var(--inputHeight);
     border-radius: 3px;
 }

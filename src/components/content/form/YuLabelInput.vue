@@ -1,7 +1,7 @@
 <template>
-  <div class="input-with-label">
+  <div class="label-input">
     <label @click="clickLabel">{{ name }}</label>
-    <za-input
+    <yu-input
       :placeholder="placeholder"
       :type="type"
       :initialValue="initialValue"
@@ -14,16 +14,16 @@
       @change="change"
       @input="input"
       @clear="clear"
-      class="za-input"
+      class="yu-input"
       ref="input"
-    ></za-input>
+    ></yu-input>
   </div>
 </template>
 
 <script>
-import ZaInput from "components/common/basic/ZaInput";
+import YuInput from "components/common/basic/YuInput";
 export default {
-  name: "InputWithLabel",
+  name: "YuLabelInput",
   props: {
     name: {
       type: String, //标签名称
@@ -58,7 +58,7 @@ export default {
     };
   },
   components: {
-    ZaInput,
+    YuInput,
   },
   methods: {
     //输入框聚焦后触发此事件，如果禁用状态，则不触发
@@ -71,7 +71,7 @@ export default {
     },
     //绑定值改变且输入框失去焦点后触发
     change() {
-      this.$emit("change");
+      this.$emit("change", this.value);
     },
     //绑定值变化时触发
     input(value) {
@@ -93,12 +93,24 @@ export default {
 </script>
 
 <style scoped>
-.input-with-label {
+.label-input {
   display: flex;
-  flex-direction: row;
+  flex-direction: var(--showDirection);
+  padding-bottom: 5px;
+  background-color: white;
   /* width: 100%; */
 }
 label {
+  width: 18%;
+  text-align: left;
+  padding-left: 10px;
   font-size: var(--normalSize);
+  align-self: flex-start;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.yu-input {
+  flex: 1;
+  padding: 0 10px;
 }
 </style>

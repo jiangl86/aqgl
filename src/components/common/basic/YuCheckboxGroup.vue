@@ -1,5 +1,5 @@
 <template>
-  <div class="za-checkbox-group">
+  <div class="yu-checkbox-group">
     <cube-checkbox-group
       v-model="selected"
       :options="options"
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: "ZaCheckboxGroup",
+  name: "YuCheckboxGroup",
   props: {
     options: {
       type: Array, //选项数组,每一选项信息：选项,如果 options 中的项为字符串，此时默认 label 和 value 的值都为该字符串的值。如果为object,则可配置label（复选框显示文字），value复选框的值，disabled

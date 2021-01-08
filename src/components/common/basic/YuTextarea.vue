@@ -1,5 +1,5 @@
 <template>
-  <div class="za-textarea">
+  <div class="yu-textarea">
     <cube-textarea
       :placeholder="placeholder"
       v-model="value"
@@ -13,15 +13,17 @@
       @input="input"
       ref="textarea"
     ></cube-textarea>
-    <textarea name="" id="" cols="30" rows="10"></textarea>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ZaTextarea",
+  name: "YuTextarea",
   props: {
-    placeholder: "请输入",
+    placeholder: {
+      type: String,
+      default: "请输入",
+    },
     maxlength: {
       type: Number,
       default: 500,
@@ -55,6 +57,10 @@ export default {
   },
   components: {},
   methods: {
+    //激活，使输入框获取焦点
+    activate() {
+      this.$refs.textarea.focus();
+    },
     // c初始化每行能显示的字符数量
     initNumOfRow() {
       let width = window

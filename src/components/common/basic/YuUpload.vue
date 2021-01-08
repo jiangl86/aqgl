@@ -1,5 +1,5 @@
 <template>
-  <div class="za-upload">
+  <div class="yu-upload">
     <cube-upload
       ref="upload"
       v-model="files"
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "ZaUpload",
+  name: "YuUpload",
   props: {
     action: "",
   },

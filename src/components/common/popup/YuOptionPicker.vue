@@ -1,31 +1,43 @@
 <template>
-  <div class="za-option-picker">
-    <div class="selections">
-      <div class="title-name">{{ name }}</div>
-      <ZaScroll class="sc" ref="scroll">
-        <ul>
-          <li v-for="item in pData" :key="item.name" @click="itemSelect(item)">
-            {{ item.name }} <i v-show="item.selected" class="cubeic-ok"></i>
-          </li>
-        </ul>
-      </ZaScroll>
+  <div class="yu-option-picker">
+    <yu-popup :isShow="show" @clickPopupOverlay="cancel">
+      <div class="selections">
+        <div class="title-name">{{ name }}</div>
+        <yu-scroll class="sc" ref="scroll">
+          <ul>
+            <li
+              v-for="item in pData"
+              :key="item.name"
+              @click="itemSelect(item)"
+            >
+              {{ item.name }} <i v-show="item.selected" class="cubeic-ok"></i>
+            </li>
+          </ul>
+        </yu-scroll>
 
-      <div class="funcs" v-if="multiSelect">
-        <button @click="cancel">取消</button
-        ><button @click="assert">确定</button>
+        <div class="funcs" v-if="multiSelect">
+          <button @click="cancel">取消</button
+          ><button @click="assert">确定</button>
+        </div>
+        <div class="funcs-cancel" v-else>
+          <button @click="cancel">取消</button>
+        </div>
       </div>
-      <div class="funcs-cancel" v-else>
-        <button @click="cancel">取消</button>
-      </div>
-    </div>
+    </yu-popup>
   </div>
 </template>
 
 <script>
-import ZaScroll from "components/common/scroll/ZaScroll";
+import YuScroll from "components/common/scroll/YuScroll";
+import YuPopup from "components/common/popup/YuPopup";
+import { Popup } from "vant";
 export default {
-  name: "ZaOptionPicker",
+  name: "YuOptionPicker",
   props: {
+    show: {
+      type: Boolean,
+      default: true,
+    },
     multiSelect: {
       type: Boolean,
       default: false,
@@ -44,7 +56,9 @@ export default {
     };
   },
   components: {
-    ZaScroll,
+    YuScroll,
+    YuPopup,
+    [Popup.name]: Popup,
   },
   methods: {
     //初始化数据
@@ -111,28 +125,10 @@ export default {
 </script>
 
 <style scoped>
-.za-option-picker {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.2);
-  z-index: 500;
-}
 .selections {
-  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
-  left: 50%;
-  top: 50%;
-  width: 70vw;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: center;
 }
 .selections .title-name {
   font-weight: 600;

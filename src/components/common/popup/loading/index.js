@@ -1,4 +1,4 @@
-import Loading from './ZaLoading'
+import Loading from './YuLoading'
 import Vue from 'vue'
 const obj = {}
 

@@ -16,7 +16,7 @@ import BScroll from "better-scroll";
 
 // BScroll.use(Zoom);
 export default {
-  name: "Scroll",
+  name: "YuScroll",
   props: {
     pullDownRefresh: {
       type: Boolean,
@@ -61,11 +61,20 @@ export default {
     scrollTo(x, y, time = 300) {
       this.scroll && this.scroll.scrollTo(x, y, time);
     },
+    scrollBy(x, y, time = 300) {
+      this.scroll && this.scroll.scrollBy(x, y, time);
+    },
     scrollToElement(el, time = 300) {
       this.scroll && this.scroll.scrollToElement(el, time, true, true);
     },
     stop() {
       this.scroll && this.scroll.stop();
+    },
+    disable() {
+      this.scroll && this.scroll.disable();
+    },
+    enable() {
+      this.scroll && this.scroll.enable();
     },
     refresh() {
       console.log("refresh");

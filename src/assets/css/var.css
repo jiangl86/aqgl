@@ -13,4 +13,6 @@
     --inputHeight: 30px;
     /* 普通li高度 */
     --liHeight: 40px;
+    /* 控件和标签排列顺序,row是在一行，column则标签在输入内容上方 */
+    --showDirection: column;
 }

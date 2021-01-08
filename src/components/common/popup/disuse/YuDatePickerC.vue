@@ -1,5 +1,5 @@
 <template>
-  <div class="za-date-picker">
+  <div class="yu-date-picker">
     <el-date-picker
       v-model="value"
       :type="type"
@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: "ZaDatePicker",
+  name: "YuDatePicker",
   props: {
     initialValue: "", //初始值，格式为'yyyy-MM-dd'
     type: {

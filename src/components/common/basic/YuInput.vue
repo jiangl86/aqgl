@@ -1,5 +1,5 @@
 <template>
-  <div class="za-input">
+  <div class="yu-input">
     <cube-input
       :placeholder="placeholder"
       :type="type"
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "ZaInput",
+  name: "YuInput",
   props: {
     placeholder: "",
     type: {
@@ -79,8 +79,8 @@ export default {
 };
 </script>
 
-<style scoped>
-.za-input {
-  flex: 1;
+<style>
+.cube-input-field {
+  font-size: var(--normalSize);
 }
 </style>

@@ -1,12 +1,12 @@
 <template>
   <div class="tree">
-    <ZaTopNav
+    <yu-top-nav
       :name="name"
       @back="cancel"
       @save="assert"
       :backTip="true"
-    ></ZaTopNav>
-    <za-input
+    ></yu-top-nav>
+    <yu-input
       v-if="showSearch"
       suffixIcon="el-icon-search"
       placeholder="请输入名称进行检索"
@@ -14,17 +14,17 @@
       ref="search"
       @keyup.native.13="search"
       @clear="recover"
-    ></za-input>
-    <ZaScroll ref="scroll" class="scroll">
+    ></yu-input>
+    <yu-scroll ref="scroll" class="scroll">
       <ul>
-        <ZaTreeNode
+        <yu-tree-node
           v-for="item in pData"
           :pData="item"
           :key="item.id"
           :autoExpandSelect="autoExpandSelect"
-        ></ZaTreeNode>
+        ></yu-tree-node>
       </ul>
-    </ZaScroll>
+    </yu-scroll>
     <div v-if="showSelected" class="selected-info" @click="showSelectedDiv">
       {{ selectedInfo }}
     </div>
@@ -32,19 +32,16 @@
 </template>
 
 <script>
-import ZaScroll from "components/common/scroll/ZaScroll";
-import ZaTreeNode from "./child/ZaTreeNode";
-import ZaTopNav from "components/common/nav/ZaTopNav";
-import ZaInput from "components/common/basic/ZaInput";
+import YuScroll from "components/common/scroll/YuScroll";
+import YuTreeNode from "./child/YuTreeNode";
+import YuTopNav from "components/common/nav/YuTopNav";
+import YuInput from "components/common/basic/YuInput";
 
 //引入js方法
-import { showDialog } from "components/common/popup/ZaDialog";
-import { showToast } from "components/common/popup/ZaToast";
-
 import debounce from "common/util/debounce";
 
 export default {
-  name: "ZaTree",
+  name: "YuTree",
   props: {
     multiSelect: {
       type: Boolean,
@@ -327,10 +324,10 @@ export default {
     },
   },
   components: {
-    ZaScroll,
-    ZaTreeNode,
-    ZaTopNav,
-    ZaInput,
+    YuScroll,
+    YuTreeNode,
+    YuTopNav,
+    YuInput,
   },
   methods: {
     //对树列表进行数据初始化，判断各节点及其子节点的选中状态
@@ -661,23 +658,36 @@ export default {
 
     cancel() {
       if (this.backTip) {
-        showDialog(this, "提示信息", "所选择的内容未保存，是否确认返回！").then(
-          (result) => {
-            if (result == "ok") {
-              this.selected.forEach((ele) => {
-                ele.selected = false;
-                ele.childSelected = false;
-              });
-              this.selected = [];
-            }
+        this.$dialog
+          .confirm({
+            title: "提示信息",
+            message: "所选择的内容未保存，是否确认返回！",
+          })
+          .then(() => {
+            this.selected.forEach((ele) => {
+              ele.selected = false;
+              ele.childSelected = false;
+            });
             this.$emit("cancel");
-          }
-        );
+          })
+          .catch(() => {});
+
+        // showDialog(this, "提示信息", "所选择的内容未保存，是否确认返回！").then(
+        //   (result) => {
+        //     if (result == "ok") {
+        //       this.selected.forEach((ele) => {
+        //         ele.selected = false;
+        //         ele.childSelected = false;
+        //       });
+        //       this.selected = [];
+        //     }
+        //     this.$emit("cancel");
+        //   }
+        // );
       }
     },
 
     assert() {
-      showToast(this, "点击了保存", "txt");
       this.$emit("assert");
     },
   },
