@@ -7,6 +7,7 @@
       :close-on-click-overlay="overlayClickClose"
       :round="round"
       :duration="duration"
+      :lock-scroll="lockScroll"
       @click="clickPopup"
       @click-overlay="clickPopupOverlay"
       @open="openPopup"
@@ -46,6 +47,10 @@ export default {
     duration: {
       type: Number,
       default: 0.3, //动画时长，单位秒
+    },
+    lockScroll: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

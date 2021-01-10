@@ -90,7 +90,7 @@ label {
   width: 18%;
   text-align: left;
   padding-left: 10px;
-  font-size: var(--normalSize);
+  font-size: var(--font-size-sm);
   align-self: flex-start;
   white-space: nowrap;
   overflow: hidden;

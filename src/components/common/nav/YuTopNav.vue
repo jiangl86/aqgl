@@ -68,7 +68,7 @@ export default {
 .top-nav .func-name {
   flex: 1;
   line-height: 44px;
-  font-size: var(--biggerSize);
+  font-size: var(--font-size-xl);
   font-weight: 600;
   text-align: left;
 }

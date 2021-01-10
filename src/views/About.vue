@@ -41,12 +41,29 @@
     /> -->
     <!-- <YuImageBrowse></YuImageBrowse> -->
     <div @click="click">显示图片</div>
-    <YuDatePicker
+    <!-- <YuDatePicker
       ref="aaa"
       type="range"
       :defaultDate="defaultDate"
       readonly
-    ></YuDatePicker>
+    ></YuDatePicker> -->
+
+    <!-- <div class="box">
+      <div class="box1" @click="divClick">
+        <ul>
+          <li>111</li>
+          <li>222</li>
+          <li>333</li>
+          <li>444</li>
+          <li>555</li>
+          <li>666</li>
+        </ul>
+      </div>
+      <div class="box2"></div>
+    </div> -->
+    <yu-badge :content="5">
+      <yu-uploader @afterRead="read"></yu-uploader>
+    </yu-badge>
   </div>
 </template>
 
@@ -67,10 +84,17 @@ import InputWithLabel from "components/content/form/YuLabelInput";
 
 import YuImageBrowse from "components/common/popup/imagebrowse/YuImageBrowse";
 
+import YuScroll from "components/common/scroll/YuScroll";
+
+import YuUploader from "components/common/basic/YuUploader";
+
+import YuBadge from "components/common/show/YuBadge";
+
 export default {
   name: "Home",
   data() {
     return {
+      fileList: [],
       selected: [
         // {
         //   name: "二级节点11",
@@ -158,8 +182,15 @@ export default {
     YuRadioGroup,
     YuDatePicker,
     YuImageBrowse,
+    YuScroll,
+    YuUploader,
+    YuBadge,
   },
   methods: {
+    read(file, detail) {
+      console.log("sss");
+      console.log(detail);
+    },
     click() {
       // this.$imageBrowse.showImg(this.imgs, 4);
       console.log("aa");
@@ -185,6 +216,9 @@ export default {
     cancelSelect() {
       this.aa = false;
     },
+    divClick() {
+      console.log("sssd");
+    },
   },
   created() {
     // this.$refs.aaa.focus();
@@ -194,7 +228,12 @@ export default {
     let sec = new Date();
     this.defaultDate.push(sec);
   },
-  mounted() {},
+  mounted() {
+    let A = [1, 23, 3, 5];
+    for (let i in A) {
+      console.log(i);
+    }
+  },
 };
 </script>
 <style scoped>
@@ -205,5 +244,40 @@ export default {
 }
 li {
   line-height: 50px;
+}
+.box {
+  background-color: white;
+  position: relative;
+  height: 300px;
+}
+.box2 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 300px;
+  width: 100%;
+  background: linear-gradient(
+      rgba(255, 255, 255, 1) 0px,
+      rgba(255, 255, 255, 0) 120px
+    ),
+    linear-gradient(rgba(255, 255, 255, 0) 180px, rgba(255, 255, 255, 1) 300px);
+  /* background-color: rgba(20, 232, 32, 0.5); */
+  background-position: top, bottom;
+  pointer-events: none;
+}
+
+.scroll {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+}
+ul {
+  width: 100%;
+  height: 2000px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
 }
 </style>

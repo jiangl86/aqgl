@@ -2,7 +2,7 @@
 @import 'var.css';
 body {
     padding: 0;
-    font-size: var(--normalSize);
+    font-size: var(--font-size-sm);
     background-color: #F4F4F4;
 }
 

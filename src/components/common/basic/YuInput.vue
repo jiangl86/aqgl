@@ -81,6 +81,6 @@ export default {
 
 <style>
 .cube-input-field {
-  font-size: var(--normalSize);
+  font-size: var(--font-size-sm);
 }
 </style>
