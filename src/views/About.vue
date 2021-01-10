@@ -61,7 +61,7 @@
       </div>
       <div class="box2"></div>
     </div> -->
-    <yu-badge :content="5">
+    <yu-badge :content="6">
       <yu-uploader @afterRead="read"></yu-uploader>
     </yu-badge>
   </div>
