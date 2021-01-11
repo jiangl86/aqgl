@@ -62,7 +62,7 @@
       <div class="box2"></div>
     </div> -->
     <yu-badge :content="5">
-      <yu-uploader @afterRead="read"></yu-uploader>
+      <yu-uploader @afterRead="read" capture="camera"></yu-uploader>
     </yu-badge>
   </div>
 </template>
