@@ -4,6 +4,7 @@
     <yu-icon icon="refund-o" :size="24" dot></yu-icon>
     <yu-tabbar></yu-tabbar>
     <yu-label-select name="风险等级" :pData="risks"></yu-label-select>
+    <yu-label-date-time name="开始时间"></yu-label-date-time>
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import YuGrid from "components/common/nav/YuGrid";
 import YuIcon from "components/common/basic/YuIcon";
 import YuTabbar from "components/common/nav/YuTabbar";
 import YuLabelSelect from "components/content/form/YuLabelSelect";
+import YuLabelDateTime from "components/content/form/YuLabelDateTime";
 export default {
   name: "Test",
   data() {
@@ -300,6 +302,7 @@ export default {
     YuIcon,
     YuTabbar,
     YuLabelSelect,
+    YuLabelDateTime,
   },
 };
 </script>
