@@ -17,4 +17,8 @@
     --liHeight: 40px;
     /* 控件和标签排列顺序,row是在一行，column则标签在输入内容上方 */
     --showDirection: column;
+    /* 输入表单label在横向时所占整行宽度比例 */
+    --form-label-width: 18%;
+    /* 输入表单label颜色 */
+    --form-label-color: #2c3e50;
 }

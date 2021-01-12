@@ -4,7 +4,10 @@
     <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
     <YuInputWithLabel name="企业名称"></YuInputWithLabel>
     <YuInputWithLabel name="地址"></YuInputWithLabel>
-    <YuTextareaWithLabel name="经营范围s颠三倒四多"></YuTextareaWithLabel>
+    <YuTextareaWithLabel
+      name="经营范围s颠三倒四多"
+      initialValue="说的就是来得及数量单价数是否适当方式发送到分顺丰到付量单价数量的就是两点尽量少的就是了距离圣诞节里说的就是垃圾的历史的距离圣诞节历史单价数量单价数量单价数量是多少雷锋精神劳动纪律到家啦圣诞节啦圣诞节啦大家"
+    ></YuTextareaWithLabel>
     <YuTextareaWithLabel name="备注"></YuTextareaWithLabel>
     <!-- <yu-image
       v-for="i in 100"

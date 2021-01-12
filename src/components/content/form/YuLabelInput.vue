@@ -101,10 +101,11 @@ export default {
   /* width: 100%; */
 }
 label {
-  width: 18%;
+  width: var(--form-label-width);
   text-align: left;
   padding-left: 10px;
   font-size: var(--font-size-sm);
+  color: var(--form-label-color);
   align-self: flex-start;
   white-space: nowrap;
   overflow: hidden;

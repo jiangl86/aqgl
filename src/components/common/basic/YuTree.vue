@@ -323,6 +323,15 @@ export default {
         : "已选择" + this.selected.length + "项";
     },
   },
+  watch: {
+    //初始化加载选项变化后，把选中信息修改为初始化内容
+    initialSelect: function () {
+      this.selected = [];
+      for (let i = 0; i < this.initialSelect.length; i++) {
+        this.selected.push(this.initialSelect[i]);
+      }
+    },
+  },
   components: {
     YuScroll,
     YuTreeNode,
@@ -656,6 +665,23 @@ export default {
       }
     },
 
+    cancelSelect() {
+      //删除新选中的项
+      for (let i = this.selected.length - 1; i >= 0; i--) {
+        let j = 0;
+        let ele = this.selected[i];
+        for (; j < this.initialSelect.length; j++) {
+          if (ele.id == this.initialSelect[j].id) {
+            break;
+          }
+        }
+        if (j == this.initialSelect.length) {
+          ele.selected = false;
+          this.selected.splice(i, 1);
+        }
+      }
+      this.$emit("cancel");
+    },
     cancel() {
       if (this.backTip) {
         this.$dialog
@@ -664,11 +690,7 @@ export default {
             message: "所选择的内容未保存，是否确认返回！",
           })
           .then(() => {
-            this.selected.forEach((ele) => {
-              ele.selected = false;
-              ele.childSelected = false;
-            });
-            this.$emit("cancel");
+            this.cancelSelect();
           })
           .catch(() => {});
 
@@ -684,11 +706,14 @@ export default {
         //     this.$emit("cancel");
         //   }
         // );
+      } else {
+        this.cancelSelect();
       }
     },
 
     assert() {
-      this.$emit("assert");
+      console.log(this.selected);
+      this.$emit("assert", this.selected);
     },
   },
   created() {

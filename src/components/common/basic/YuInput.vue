@@ -20,7 +20,10 @@
 export default {
   name: "YuInput",
   props: {
-    placeholder: "",
+    placeholder: {
+      type: String,
+      default: "请输入",
+    },
     type: {
       type: String,
       default: "text", //支持text/number/password/date

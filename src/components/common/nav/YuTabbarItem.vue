@@ -69,8 +69,12 @@ export default {
       console.log(this.icon);
     },
     changeFocus(index) {
-      this.$router.replace(this.to);
+      if (this.to) {
+        this.$router.replace(this.to);
+      }
+
       this.setStyle();
+      this.$emit("clickItem", index);
     },
   },
   computed: {
@@ -96,6 +100,6 @@ export default {
 
 .icon-text {
   flex: 1;
-  font-size: 12px;
+  font-size: var(--font-size-sm);
 }
 </style>

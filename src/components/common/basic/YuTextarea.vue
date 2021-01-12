@@ -50,9 +50,10 @@ export default {
     return {
       value: this.initialValue,
       indicator: { remain: this.showReamin },
-      initialHeight: 0,
-      numPerRow: 0,
-      rowHeight: 0,
+      initialHeight: 0, //组件初始高度
+      initialRows: 1, //初始行数
+      numPerRow: 0, //每行可展示字符个数
+      rowHeight: 0, //每行行高
     };
   },
   components: {},
@@ -61,16 +62,22 @@ export default {
     activate() {
       this.$refs.textarea.focus();
     },
+
+    //设置value值
+    setValue(value) {
+      this.value = value;
+    },
     // c初始化每行能显示的字符数量
     initNumOfRow() {
       let width = window
         .getComputedStyle(this.$refs.textarea.$el)
         .width.replace("px", "");
       const styles = getComputedStyle(document.querySelector(":root"));
-      let fontSize = String(styles.getPropertyValue("--normalSize"))
+      let fontSize = String(styles.getPropertyValue("--font-size-sm"))
         .trim()
         .replace("px", "");
       this.numPerRow = Math.floor((width - 20) / fontSize);
+      this.rowHeight = Math.ceil(fontSize * 1.4);
     },
     //输入框聚焦后触发此事件，如果禁用状态，则不触发
     focus() {
@@ -89,14 +96,16 @@ export default {
           Math.ceil(this.value.length / this.numPerRow) +
           this.value.split("/n").length -
           1;
-        if (height > this.initialHeight && this.rowHeight == 0) {
-          this.rowHeight = (height - this.initialHeight) / (rows - 1);
-        }
         if (rows >= 1 && this.rowHeight != 0) {
-          height = this.initialHeight + (rows - 1) * this.rowHeight;
-          console.log(height);
+          height =
+            this.initialHeight + (rows - this.initialRows) * this.rowHeight;
           this.$refs.textarea.$el.style.height = height + "px";
         }
+        // console.log(this.numPerRow);
+        // console.log(rows);
+        // console.log(this.initialHeight);
+        // console.log(this.rowHeight);
+        // console.log(height);
       }
       this.$emit("input", value);
     },
@@ -104,6 +113,14 @@ export default {
   mounted() {
     this.initialHeight = this.$refs.textarea.$el.children[0].scrollHeight;
     this.initNumOfRow();
+    //根据初始值设置组件初始高度
+    if (this.initialValue) {
+      this.$refs.textarea.$el.style.height = this.initialHeight + "px";
+      this.initialRows =
+        Math.ceil(this.initialValue.length / this.numPerRow) +
+        this.value.split("/n").length -
+        1;
+    }
   },
 };
 </script>

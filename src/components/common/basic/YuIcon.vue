@@ -24,10 +24,10 @@ export default {
       type: String, //图标右上角徽标的内容，如位操作数量，
     },
     color: {
-      type: String,
+      type: String, //图标颜色
     },
     size: {
-      type: Number,
+      type: Number, //图标大小
     },
   },
   data() {

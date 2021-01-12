@@ -60,6 +60,15 @@ export default {
     YuPopup,
     [Popup.name]: Popup,
   },
+  watch: {
+    //初始化加载选项变化后，把选中信息修改为初始化内容
+    initialSelect: function () {
+      this.selected = [];
+      for (let i = 0; i < this.initialSelect.length; i++) {
+        this.selected.push(this.initialSelect[i]);
+      }
+    },
+  },
   methods: {
     //初始化数据
     initData() {
@@ -107,11 +116,22 @@ export default {
       this.$emit("assert", this.selected);
     },
 
-    //点击取消
+    //点击取消,删除不在初始列表中的选项
     cancel() {
-      this.selected.forEach((ele) => {
-        ele.selected = false;
-      });
+      //删除新选中的项
+      for (let i = this.selected.length - 1; i >= 0; i--) {
+        let j = 0;
+        let ele = this.selected[i];
+        for (; j < this.initialSelect.length; j++) {
+          if (ele.id == this.initialSelect[j].id) {
+            break;
+          }
+        }
+        if (j == this.initialSelect.length) {
+          ele.selected = false;
+          this.selected.splice(i, 1);
+        }
+      }
       this.$emit("cancel");
     },
   },
