@@ -8,10 +8,12 @@
       :round="round"
       :duration="duration"
       :lock-scroll="lockScroll"
+      :lazy-render="lazyRender"
       @click="clickPopup"
       @click-overlay="clickPopupOverlay"
       @open="openPopup"
       @close="closePopup"
+      @opened="openedPopup"
     >
       <slot>aaaa</slot>
     </van-popup>
@@ -50,7 +52,11 @@ export default {
     },
     lockScroll: {
       type: Boolean,
-      default: false,
+      default: false, //是否锁定滑动
+    },
+    lazyRender: {
+      type: Boolean,
+      default: true, //是否在显示弹层时才渲染节点
     },
   },
   data() {
@@ -68,6 +74,9 @@ export default {
     },
     openPopup() {
       this.$emit("openPopup");
+    },
+    openedPopup() {
+      this.$emit("openedPopup");
     },
     closePopup() {
       this.$emit("closePopup");

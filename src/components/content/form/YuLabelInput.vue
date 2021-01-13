@@ -97,7 +97,7 @@ export default {
   display: flex;
   flex-direction: var(--showDirection);
   padding-bottom: 5px;
-  background-color: white;
+  background-color: var(--form-field-color);
   /* width: 100%; */
 }
 label {

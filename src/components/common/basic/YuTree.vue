@@ -712,7 +712,6 @@ export default {
     },
 
     assert() {
-      console.log(this.selected);
       this.$emit("assert", this.selected);
     },
   },
@@ -732,7 +731,6 @@ export default {
     this.$bus.$on("nodeClick", (node) => {
       this.nodeClick(node);
     });
-    console.log(window.getComputedStyle(this.$refs.scroll.$el).height);
   },
   updated() {},
 };

@@ -1,5 +1,5 @@
 <template>
-  <div class="za-radio-group">
+  <div class="yu-radio-group">
     <cube-radio-group
       v-model="selected"
       :options="options"
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "ZaRadioGroup",
+  name: "YuRadioGroup",
   props: {
     options: {
       type: Array, //选项数组,每一选项信息：选项,如果 options 中的项为字符串，此时默认 label 和 value 的值都为该字符串的值。如果为object,则可配置label（复选框显示文字），value复选框的值，disabled

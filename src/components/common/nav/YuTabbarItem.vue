@@ -66,7 +66,6 @@ export default {
     setStyle() {
       this.color = this.isActive ? this.activeColor : this.defaultColor;
       this.icon = this.isActive ? this.activeIcon : this.defaultIcon;
-      console.log(this.icon);
     },
     changeFocus(index) {
       if (this.to) {

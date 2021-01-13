@@ -21,4 +21,8 @@
     --form-label-width: 18%;
     /* 输入表单label颜色 */
     --form-label-color: #2c3e50;
+    /* 输入框中清除按钮颜色 */
+    --clear-button-color: #ccc;
+    /* 各类输入、选择等背景颜色 */
+    --form-field-color: white;
 }

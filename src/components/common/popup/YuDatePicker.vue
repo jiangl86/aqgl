@@ -78,7 +78,7 @@ export default {
   },
   data() {
     return {
-      show: true,
+      show: false,
     };
   },
   computed: {
@@ -108,7 +108,7 @@ export default {
     scrollToDate(date) {
       this.$refs.calendar.scrollToDate(date);
     },
-    //取消选择时触发，value为date对象（single）或date对象数组
+    //选择时触发，value为date对象（single）或date对象数组
     selectDate(value) {
       console.log(value);
       this.$emit("selectDate", value);

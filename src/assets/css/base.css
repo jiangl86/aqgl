@@ -33,6 +33,11 @@ select {
     border-radius: 3px;
 }
 
+input::placeholder,
+textarea::placeholder {
+    color: #CCCCCC !important
+}
+
 textarea {
     outline: none;
     border: 1px solid #ccc;

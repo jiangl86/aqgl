@@ -3,7 +3,9 @@
     <yu-popup
       :isShow="show"
       :round="round"
+      :lazyRender="lazyRender"
       @clickPopupOverlay="hideTimerPicker"
+      @openedPopup="openedPopup"
     >
       <div class="picker-info" ref="pickerInfo">
         <div class="title">{{ title }}</div>
@@ -52,7 +54,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "请选择时间",
+      default: "请选择具体时间",
     },
     minHour: {
       type: Number,
@@ -64,7 +66,7 @@ export default {
     },
     defaultTime: {
       type: String,
-      default: "10:15",
+      default: "08:00",
     },
     onlyHour: {
       type: Boolean,
@@ -82,14 +84,19 @@ export default {
       type: Boolean,
       default: false,
     },
+    lazyRender: {
+      type: Boolean,
+      default: true, //是否在显示弹层时才渲染节点
+    },
   },
   data() {
     return {
-      show: true,
+      show: false,
       hourArray: [],
       minuteArray: [],
       hourIndex: 0,
       minuteIndex: 0,
+      firstOpen: true, //是否是第一次加载，因为pop支持在弹出时才渲染节点（直接加载scroll有问题），本组件第一次渲染完成后需要滑动到默认时间
     };
   },
   components: {
@@ -99,7 +106,6 @@ export default {
   watch: {},
   created() {
     this.initData();
-    console.log(this.hourArray);
   },
   mounted() {
     this.$refs.hourScroll && this.$refs.hourScroll.refresh();
@@ -152,8 +158,6 @@ export default {
 
       //初始化默认时间
       let defaultTimeArr = this.defaultTime.split(":");
-      console.log(this.defaultTime);
-      console.log(defaultTimeArr);
       let defaultHour = defaultTimeArr[0];
       if (!defaultHour.startsWith("0") && defaultHour.length == 1) {
         defaultHour = "0" + defaultHour;
@@ -175,7 +179,8 @@ export default {
     },
 
     scrollToDefault() {
-      this.$refs.hourScroll.scrollTo(0, -this.hourIndex * 40);
+      this.$refs.hourScroll &&
+        this.$refs.hourScroll.scrollTo(0, -this.hourIndex * 40);
       this.$refs.minuteScroll &&
         this.$refs.minuteScroll.scrollTo(0, -this.minuteIndex * 40);
     },
@@ -214,6 +219,14 @@ export default {
       }
       this.hideTimerPicker();
       this.$emit("confirmTime", value);
+    },
+
+    //打开弹框事件
+    openedPopup() {
+      if (this.firstOpen) {
+        this.scrollToDefault();
+        this.firstOpen = false;
+      }
     },
   },
 };

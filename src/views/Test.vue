@@ -4,7 +4,11 @@
     <yu-icon icon="refund-o" :size="24" dot></yu-icon>
     <yu-tabbar></yu-tabbar>
     <yu-label-select name="风险等级" :pData="risks"></yu-label-select>
-    <yu-label-date-time name="开始时间"></yu-label-date-time>
+    <yu-label-date-time
+      name="开始时间"
+      :initialValue="initValue"
+      type="datetimeRange"
+    ></yu-label-date-time>
   </div>
 </template>
 
@@ -295,6 +299,7 @@ export default {
           ],
         },
       ],
+      initValue: ["2021-1-14 12:00", "2022-10-22"],
     };
   },
   components: {

@@ -66,6 +66,7 @@ export default {
     return {
       foldIcon: "arrow-up",
       showContent: true,
+      value: this.initialValue,
     };
   },
   components: {
@@ -111,7 +112,7 @@ export default {
   display: flex;
   flex-direction: var(--showDirection);
   padding-bottom: 5px;
-  background-color: white;
+  background-color: var(--form-field-color);
   position: relative;
 }
 label {

@@ -103,7 +103,6 @@ export default {
       this.initX1 = e.touches[0].pageX;
       this.initY1 = e.touches[0].pageY;
       if (e.touches.length == 1) {
-        console.log("aa");
         //单击计时器
         if (this.singleClickTimer) {
           clearTimeout(this.singleClickTimer);
@@ -118,7 +117,6 @@ export default {
         }, 1500);
       }
       if (e.touches.length == 2) {
-        console.log("bb");
         //清除单击计时器
         if (this.singleClickTimer) {
           clearTimeout(this.singleClickTimer);
@@ -217,7 +215,6 @@ export default {
       this.fullFillSingleClick = false;
     },
     dblclick() {
-      console.log("双击");
       //如果双击，清除单击计时器
       if (this.singleClickTimer) {
         clearTimeout(this.singleClickTimer);
@@ -320,8 +317,6 @@ export default {
   mounted() {
     this.initialWidth = getEleWidth(document.querySelector("body"));
     this.initialHeight = window.screen.height;
-    console.log(this.initialHeight);
-    console.log(this.initialWidth);
   },
 };
 </script>
