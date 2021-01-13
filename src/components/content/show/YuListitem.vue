@@ -7,13 +7,29 @@
       :width="width"
       :height="height"
       :fit="fit"
+      class="image-info"
     ></yu-image>
-    <div class="content"></div>
+    <div class="content">
+      <div class="title">{{ pData.name }}</div>
+      <yu-tag v-if="showState" class="state">{{ pData.state }}</yu-tag>
+      <div
+        class="other-info"
+        v-for="(item, index) in pData.otherInfo"
+        :key="pData.id + 'o' + index"
+      >
+        <span class="keyInfo">{{ item.key }}:</span
+        ><span class="valueInfo">{{ item.value }}</span>
+      </div>
+      <div class="current-user-info" :style="'color:' + currentUserColor">
+        {{ pData.currentUser }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import YuImage from "components/common/basic/YuImage";
+import YuTag from "components/common/basic/YuTag";
 export default {
   name: "YuListitem",
   props: {
@@ -41,18 +57,19 @@ export default {
       type: Boolean,
       default: false, //是否显示state,默认在右上角
     },
-    colNum: {
-      type: Number,
-      default: 1, //每行显示数量，仅没有图片时设置生效
-    },
     bgColor: {
       type: String,
       default: "white",
+    },
+    currentUserColor: {
+      type: String,
+      default: "orange",
     },
     pData: {
       type: Object,
       default: function () {
         return {
+          id: "", //数据id
           image: "", //图片路径
           name: "", //列表显示的标题，相对其他信息使用大号字体
           state: "", //状态名称
@@ -68,13 +85,34 @@ export default {
     },
   },
   data() {
-    return {
-      YuImage,
-    };
+    return {};
   },
-  components: {},
+  components: {
+    YuTag,
+    YuImage,
+  },
 };
 </script>
 
 <style scoped>
+.yu-listitem {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  padding: 0 10px;
+}
+.image-info {
+  margin-right: 10px;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+}
 </style>
