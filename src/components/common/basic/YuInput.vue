@@ -12,6 +12,7 @@
       @blur="blur"
       @change="change"
       @input="input"
+      ref="input"
     ></cube-input>
   </div>
 </template>
@@ -27,6 +28,9 @@ export default {
     type: {
       type: String,
       default: "text", //支持text/number/password/date
+    },
+    height: {
+      type: Number,
     },
     maxlength: {
       type: Number,
@@ -52,6 +56,12 @@ export default {
     };
   },
   components: {},
+  mounted() {
+    if (this.height) {
+      this.$refs.input.$el.querySelector("input").style.height =
+        this.height + "px";
+    }
+  },
   methods: {
     //输入框聚焦后触发此事件，如果禁用状态，则不触发
     focus() {

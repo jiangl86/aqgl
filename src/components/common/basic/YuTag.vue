@@ -27,14 +27,15 @@ export default {
     },
     size: {
       type: String,
-      default: "medium", //大小, 可选值为large medium
+      default: "small", //大小, 可选值为large medium
     },
     color: {
       type: String, //标签颜色
+      // default: "#406dfc",
     },
     plain: {
       type: Boolean,
-      default: false, //是否为空心样式
+      default: true, //是否为空心样式
     },
     round: {
       type: Boolean,

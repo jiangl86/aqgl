@@ -25,4 +25,6 @@
     --clear-button-color: #ccc;
     /* 各类输入、选择等背景颜色 */
     --form-field-color: white;
+    /* 表格内容颜色 */
+    --list-content-color: #666;
 }

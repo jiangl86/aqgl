@@ -80,5 +80,6 @@ export default {
   bottom: 0;
   width: 100vw;
   height: 49px;
+  z-index: 999;
 }
 </style>

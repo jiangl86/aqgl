@@ -4,7 +4,7 @@
       <slot name="back-btn"><i class="cubeic-back"></i></slot>
     </div>
     <div class="func-name">{{ name }}</div>
-    <div class="func-actions">
+    <div class="func-actions" v-if="showFunc">
       <slot name="func-actions"><button @click="save">保存</button></slot>
     </div>
   </div>
@@ -23,6 +23,10 @@ export default {
     backTip: {
       type: Boolean,
       default: false,
+    },
+    showFunc: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {

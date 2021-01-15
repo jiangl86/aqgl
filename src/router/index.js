@@ -6,11 +6,13 @@ Vue.use(VueRouter)
 
 const Test = () =>
     import ('views/Test')
+const TestList = () =>
+    import ('views/TestList')
 
 const routes = [{
         path: '/',
         name: 'Home',
-        component: Home
+        component: TestList
     },
     {
         path: '/about',
@@ -22,6 +24,11 @@ const routes = [{
         path: '/test',
         name: 'Test',
         component: Test
+    },
+    {
+        path: '/testList',
+        name: 'TestList',
+        component: TestList
     },
 ]
 
