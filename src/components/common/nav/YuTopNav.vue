@@ -1,5 +1,5 @@
 <template>
-  <div class="top-nav">
+  <div class="top-nav clearfix">
     <div class="back-btn" v-if="showBack" @click="back">
       <slot name="back-btn"><i class="cubeic-back"></i></slot>
     </div>
@@ -64,6 +64,7 @@ export default {
   color: white;
   box-sizing: border-box;
 }
+
 .top-nav .back-btn {
   padding: 10px 10px 10px 0;
   font-size: 28px;

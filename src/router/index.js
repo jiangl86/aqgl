@@ -8,11 +8,13 @@ const Test = () =>
     import ('views/Test')
 const TestList = () =>
     import ('views/TestList')
+const TestMenuList = () =>
+    import ('views/TestMenuList')
 
 const routes = [{
         path: '/',
         name: 'Home',
-        component: TestList
+        component: TestMenuList
     },
     {
         path: '/about',

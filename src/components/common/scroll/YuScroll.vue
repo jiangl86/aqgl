@@ -5,7 +5,12 @@
         下拉刷新数据
       </div>
       <slot></slot>
-      <div class="more" v-if="pullUpload">上拉加载更多...</div>
+      <div
+        class="more"
+        v-if="pullUpload && scroll && positionY < scroll.maxScrollY - 10"
+      >
+        上拉加载更多...
+      </div>
     </div>
   </div>
 </template>
@@ -82,7 +87,7 @@ export default {
     },
     finishPullDown() {
       this.scroll && this.scroll.finishPullDown();
-      this.scroll && tis.scroll.refresh();
+      this.scroll && this.scroll.refresh();
     },
     finishPullUp() {
       this.scroll && this.scroll.finishPullUp();

@@ -113,6 +113,9 @@ export default {
       }
     }
   },
+  mounted() {
+    this.$emit("itemLoaded");
+  },
   methods: {
     //点击item
     clickItem() {
