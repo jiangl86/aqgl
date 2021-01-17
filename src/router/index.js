@@ -10,6 +10,8 @@ const TestList = () =>
     import ('views/TestList')
 const TestMenuList = () =>
     import ('views/TestMenuList')
+const TestKeyboard = () =>
+    import ('views/TestKeyboard')
 
 const routes = [{
         path: '/',
@@ -32,6 +34,12 @@ const routes = [{
         name: 'TestList',
         component: TestList
     },
+    {
+        path: '/csjp',
+        name: 'csjp',
+        component: TestKeyboard
+    },
+
 ]
 
 const router = new VueRouter({

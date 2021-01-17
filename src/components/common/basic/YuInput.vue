@@ -62,6 +62,11 @@ export default {
         this.height + "px";
     }
   },
+  watch: {
+    initialValue: function () {
+      this.value = this.initialValue;
+    },
+  },
   methods: {
     //输入框聚焦后触发此事件，如果禁用状态，则不触发
     focus() {

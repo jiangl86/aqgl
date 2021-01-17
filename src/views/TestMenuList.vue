@@ -63,6 +63,13 @@ export default {
               to: "/ssp", //点击后跳转的目标路由对象，同 vue-router 的 to 属性
               description: "快速记录隐患",
             },
+            {
+              code: "csjp", //编码
+              text: "测试键盘",
+              icon: "photo", //图标名称或图片链接
+
+              to: "/csjp", //点击后跳转的目标路由对象，同 vue-router 的 to 属性
+            },
           ],
         },
       ],
