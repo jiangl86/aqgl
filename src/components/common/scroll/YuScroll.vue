@@ -134,12 +134,12 @@ export default {
 </script>
 
 <style scoped>
-.content {
+/* .content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  /* width: 100%; */
-}
+  align-items: center; 
+  width: 100%;
+} */
 
 .refresh {
   width: 100%;

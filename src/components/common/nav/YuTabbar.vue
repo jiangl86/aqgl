@@ -27,7 +27,7 @@ export default {
             defaultIcon: "orders-o",
             activeIcon: "column",
             dot: true,
-            to: "/test",
+            to: "/task",
           },
           {
             name: "应用",

@@ -57,6 +57,7 @@ export default {
     return {
       color: this.color,
       icon: this.defaultIcon,
+      isActive: false,
     };
   },
   components: {
@@ -64,11 +65,12 @@ export default {
   },
   methods: {
     setStyle() {
+      this.isActive = this.$route.path == this.to;
       this.color = this.isActive ? this.activeColor : this.defaultColor;
       this.icon = this.isActive ? this.activeIcon : this.defaultIcon;
     },
     changeFocus(index) {
-      if (this.to) {
+      if (this.to && this.to != this.$route.path) {
         this.$router.replace(this.to);
       }
 
@@ -76,9 +78,10 @@ export default {
       this.$emit("clickItem", index);
     },
   },
-  computed: {
-    isActive() {
-      return this.$route.path == this.to;
+  watch: {
+    $route(to, from) {
+      this.isActive = this.$route.path == this.to;
+      this.setStyle();
     },
   },
   mounted() {

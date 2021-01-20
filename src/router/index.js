@@ -1,44 +1,84 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import aqggRoutes from './aqggRoutes'
 
 Vue.use(VueRouter)
+
+
 
 const Test = () =>
     import ('views/Test')
 const TestList = () =>
     import ('views/TestList')
-const TestMenuList = () =>
-    import ('views/TestMenuList')
-const TestKeyboard = () =>
-    import ('views/TestKeyboard')
+const TestComponent = () =>
+    import ('views/TestComponent')
+
+
+
+const Home = () =>
+    import ('views/home/Index')
+const Task = () =>
+    import ('views/home/Task')
+const MainFuncs = () =>
+    import ('views/home/MainFuncs')
+const Data = () =>
+    import ('views/home/Data')
+const Profile = () =>
+    import ('views/home/Profile')
+
+const ChildMenuList = () =>
+    import ('views/common/ChildMenuList')
 
 const routes = [{
         path: '/',
-        name: 'Home',
-        component: TestMenuList
+        component: Home,
     },
+
     {
-        path: '/about',
-        name: 'About',
-        component: () =>
-            import ( /* webpackChunkName: "about" */ '../views/About.vue')
+        path: '/home',
+        name: 'Home',
+        component: Home,
+        redirect: '/home/task',
+        children: [{
+                path: 'task',
+                name: 'Task',
+                component: Task,
+            }, {
+                path: 'mainfuncs',
+                name: 'MainFuncs',
+                component: MainFuncs,
+            },
+            {
+                path: 'data',
+                name: 'Data',
+                component: Data,
+            },
+            {
+                path: 'profile',
+                name: 'Profile',
+                component: Profile,
+            },
+        ],
     },
+
+    {
+        path: '/childmenus/:code',
+        name: 'ChildMenuList',
+        component: ChildMenuList,
+    },
+
+    ...aqggRoutes,
     {
         path: '/test',
         name: 'Test',
-        component: Test
+        component: TestComponent
     },
     {
         path: '/testList',
         name: 'TestList',
         component: TestList
     },
-    {
-        path: '/csjp',
-        name: 'csjp',
-        component: TestKeyboard
-    },
+
 
 ]
 
@@ -48,4 +88,8 @@ const router = new VueRouter({
     routes
 })
 
+
+router.beforeEach((to, from, next) => {
+    next()
+})
 export default router

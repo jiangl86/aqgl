@@ -224,12 +224,12 @@ export default {
         this.$refs.scroll.scrollTo(position.x, 0);
       }
     },
-    //下拉加载
+    //上拉加载
     pullingUp() {
       this.isPullingUp = true;
       this.$emit("pullingUp");
     },
-    // 上拉刷新
+    // 下拉刷新
     pullingDown() {
       this.isPullingDown = true;
       this.$emit("pullingDown");

@@ -3,13 +3,17 @@
     <yu-grid :pData="funcs" :space="10" :columnNum="3"></yu-grid>
     <yu-icon icon="refund-o" :size="24" dot></yu-icon>
     <yu-tabbar></yu-tabbar>
-    <yu-label-select name="风险等级" :pData="risks"></yu-label-select>
-    <yu-label-date-time
+    <yu-label-select
+      name="风险等级"
+      :pData="risks"
+      selectType="option"
+    ></yu-label-select>
+    <!-- <yu-label-date-time
       name="开始时间"
       :initialValue="initValue"
       type="datetimeRange"
-    ></yu-label-date-time>
-    <yu-listitem showImage showState :pData="itemData" round></yu-listitem>
+    ></yu-label-date-time> -->
+    <!-- <yu-listitem showImage showState :pData="itemData" round></yu-listitem> -->
   </div>
 </template>
 

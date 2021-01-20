@@ -12,6 +12,7 @@
       :result-type="resultType"
       :image-fit="imageFit"
       :upload-icon="uploadIcon"
+      :show-upload="showUpload"
       :after-read="afterRead"
       :beforeRead="beforeRead"
       :disabled="disabled"
@@ -78,10 +79,25 @@ export default {
       type: String,
       default: "photograph", //上传区域图标名称或图片链接
     },
+    showUpload: {
+      type: Boolean,
+      default: true, //是否展示上传图标，查看时不展示
+    },
+    initialFiles: {
+      type: Array, //初始加载内容 ,数组每个元素为一个对象，若为网络图片，key为url如：{url:'http://128.0.0.1/232.jpg'}
+      default: function () {
+        return null;
+      },
+    },
   },
   data() {
     return {
-      fileList: [],
+      fileList: [
+        {
+          url:
+            "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2583035764,1571388243&fm=26&gp=0.jpg",
+        },
+      ],
     };
   },
   components: {

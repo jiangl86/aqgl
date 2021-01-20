@@ -77,7 +77,10 @@ export default {
   font-weight: 600;
   text-align: left;
 }
-
+.func-actions {
+  display: flex;
+  flex-direction: row;
+}
 .top-nav .func-actions button {
   padding: 5px 10px;
   margin-right: 10px;

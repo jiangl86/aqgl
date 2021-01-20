@@ -2,6 +2,7 @@
   <div class="yu-label-uploader">
     <label>{{ name }}</label>
     <yu-uploader
+      :initialFiles="value"
       :previewSize="previewSize"
       :disabled="disabled"
       :deletable="deletable"
@@ -9,8 +10,12 @@
       :resultType="resultType"
       :imageFit="imageFit"
       :uploadIcon="uploadIcon"
+      :showUpload="showUpload"
       class="yu-uploader"
       ref="uploader"
+      @afterRead="afterRead"
+      @clickPreview="clickPreview"
+      @deleteFile="deleteFile"
     ></yu-uploader>
   </div>
 </template>
@@ -24,6 +29,10 @@ export default {
       type: String, //标签名称
       required: true,
     },
+    readonly: {
+      type: Boolean, //控件是否只读
+      default: false,
+    },
     previewSize: {
       type: Number,
       default: 80, //预览图和上传区域的尺寸，默认单位为 px
@@ -31,10 +40,6 @@ export default {
     disabled: {
       type: Boolean,
       default: false, //是否禁用
-    },
-    deletable: {
-      type: Boolean,
-      default: true, //是否显示删除按钮
     },
     capture: {
       type: String, //图片选取模式，可选值为 camera (直接调起摄像头)
@@ -51,12 +56,56 @@ export default {
       type: String,
       default: "photograph", //上传区域图标名称或图片链接
     },
+    initialFiles: {
+      type: Array, //初始加载内容 ,数组每个元素为一个对象，若为网络图片，key为url如：{url:'http://128.0.0.1/232.jpg'}
+      default: function () {
+        return null;
+      },
+    },
   },
   data() {
-    return {};
+    return {
+      value: this.initialFiles, //文件列表，正常情况下为上传后的url地址，上传成功后才保存在该列表中
+      failFiles: [], //上传失败的文件列表
+      deletable: true, //照片是否有删除按钮
+      showUpload: true, //是否显示上传图片按钮
+    };
   },
   components: {
     YuUploader,
+  },
+  created() {
+    this.initData();
+  },
+  watch: {
+    readonly: function () {
+      console.log(this.readonly);
+      if (this.readonly) {
+        this.deletable = false;
+        this.showUpload = false;
+      }
+    },
+  },
+  methods: {
+    //初始化数据方法
+    initData() {
+      this.deletable = !this.readonly;
+      this.showUpload = !this.readonly;
+    },
+
+    //读取文件后执行
+    afterRead(file, detail) {
+      // 或许在此上传文件，成功后放入value列表，失败放入failFiles
+      console.log(file, detail);
+    },
+
+    //点击预览图,后续根据情况选择加载放大缩小的插件
+    clickPreview(file, detail) {},
+
+    //删除文件操作，主要是删除value或failFiles中对应文件
+    deleteFile(file, detail) {
+      console.log(file, detail);
+    },
   },
 };
 </script>

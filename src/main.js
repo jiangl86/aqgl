@@ -5,7 +5,6 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import { DatePicker } from 'element-ui';
 
 
 import loading from 'components/common/popup/loading';
@@ -18,7 +17,6 @@ Vue.prototype.$bus = new Vue()
 Vue.use(loading)
 Vue.use(imageBrowse)
 
-Vue.use(DatePicker)
 
 new Vue({
     router,

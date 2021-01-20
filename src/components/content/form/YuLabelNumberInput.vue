@@ -92,7 +92,7 @@ export default {
 
     //点击标签使对应的输入框激活
     clickLabel() {
-      this.$refs.input.$el.children[0].children[0].focus();
+      this.focus();
     },
   },
 };
