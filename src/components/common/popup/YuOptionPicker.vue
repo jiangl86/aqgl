@@ -30,7 +30,7 @@
 <script>
 import YuScroll from "components/common/scroll/YuScroll";
 import YuPopup from "components/common/popup/YuPopup";
-import { Popup } from "vant";
+
 export default {
   name: "YuOptionPicker",
   props: {
@@ -58,7 +58,6 @@ export default {
   components: {
     YuScroll,
     YuPopup,
-    [Popup.name]: Popup,
   },
   watch: {
     //初始化加载选项变化后，把选中信息修改为初始化内容

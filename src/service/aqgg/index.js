@@ -1,9 +1,6 @@
 export function getAqggList({ page, row = 15, name }) {
-    console.log(page);
-    console.log(row);
-    console.log(name);
     return [{
-            id: "1", //数据id
+            id: "1" + page, //数据id
             name: "内蒙古呼伦贝尔一医院2次环境核酸检测均呈阳", //列表显示的标题，相对其他信息使用大号字体
             state: "审批通过",
             otherInfo: [{
@@ -29,7 +26,7 @@ export function getAqggList({ page, row = 15, name }) {
             ],
         },
         {
-            id: "2", //数据id
+            id: "2" + page, //数据id
             name: "公告2222222", //列表显示的标题，相对其他信息使用大号字体
             state: "审批通过",
             otherInfo: [{
@@ -49,6 +46,13 @@ export function getAqggList({ page, row = 15, name }) {
                     value: "2020-12-07", //value的值，比如“张三”
                 },
             ],
+            dataRight: {
+                "editFlag": "1", //修改权限标记
+                "delFlag": "1", //删除权限标记
+                "auditFlag": "1", //审批权限标记
+                "reAuditFlag": "1", //撤回审批权限标记
+                "reapirFlag": "1", //整改权限标记
+            }
         },
     ]
 }
@@ -57,6 +61,13 @@ export function getAqggDetail({ ggId }) {
     return {
         ggId: ggId,
         ggName: '说的就是来得及熟练度进行',
-        ggContent: '是都说了都结束了到家歇斯底里聚少离多计算机数量是多少来对付就算了，是都发生了打飞机死了圣诞福利时间到了附近都是，方式发送链接'
+        ggContent: '是都说了都结束了到家歇斯底里聚少离多计算机数量是多少来对付就算了，是都发生了打飞机死了圣诞福利时间到了附近都是，方式发送链接',
+        dataRight: {
+            "editFlag": "1", //修改权限标记
+            "delFlag": "1", //删除权限标记
+            "auditFlag": "1", //审批权限标记
+            "reAuditFlag": "1", //撤回审批权限标记
+            "reapirFlag": "1", //整改权限标记
+        }
     }
 }

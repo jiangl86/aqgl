@@ -2,6 +2,8 @@ const AqggList = () =>
     import ('views/aqgg/List')
 const AqggDetail = () =>
     import ('views/aqgg/Detail')
+const AqggAudit = () =>
+    import ('views/aqgg/Audit')
 
 const aqggRoutes = [{
         path: '/notice',
@@ -12,6 +14,11 @@ const aqggRoutes = [{
         path: '/notice/detail',
         name: 'AqggDetail',
         component: AqggDetail,
+    },
+    {
+        path: '/notice/audit',
+        name: 'AqggAudit',
+        component: AqggAudit,
     },
 ]
 

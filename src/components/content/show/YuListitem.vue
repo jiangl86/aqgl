@@ -2,7 +2,9 @@
   <div
     class="yu-listitem"
     :style="'background-color:' + bgColor"
-    @click="clickItem"
+    @touchstart="touchstart"
+    @touchmove="touchmove"
+    @touchend="touchend"
   >
     <yu-image
       v-if="showImage"
@@ -25,7 +27,11 @@
 
         <span class="value-info">{{ item.value }}</span>
       </div>
-      <div class="current-user-info" :style="'color:' + currentUserColor">
+      <div
+        class="current-user-info"
+        :style="'color:' + currentUserColor"
+        v-if="pData.currentUser"
+      >
         当前由{{ pData.currentUser }}处理
       </div>
       <yu-tag
@@ -98,6 +104,12 @@ export default {
   data() {
     return {
       tagType: "primary",
+
+      singleClickTimer: null, //单击计时器
+      fullFillSingleClick: false, //是否满足单击条件，300毫秒内没有双击，且没有长按，没有移动在结束点击时算单击
+      longTouchTimer: null, //长按计时器
+      initX1: 0, //放大缩小时，第一个手指初始x坐标
+      initY1: 0, //放大缩小时，第一个手指初始y坐标
     };
   },
   components: {
@@ -120,6 +132,65 @@ export default {
     //点击item
     clickItem() {
       this.$emit("clickItem", this.pData);
+    },
+
+    //长按事件
+    longTouch() {
+      this.$emit("longTouch", this.pData);
+    },
+
+    //通过下面三个事件判断是单击还是长按事件
+    touchstart(e) {
+      this.initX1 = e.touches[0].pageX;
+      this.initY1 = e.touches[0].pageY;
+      if (e.touches.length == 1) {
+        //单击计时器
+        if (this.singleClickTimer) {
+          clearTimeout(this.singleClickTimer);
+        }
+
+        this.fullFillSingleClick = true;
+
+        //长按计时器
+        this.longTouchTimer = setTimeout(() => {
+          this.fullFillSingleClick = false; //如果满足长按条件，则取消单击条件
+          this.longTouch(); //执行长按事件
+        }, 1500);
+      }
+      if (e.touches.length == 2) {
+        //不满足单击条件
+        this.fullFillSingleClick = false;
+        //清除长按计时器
+        if (this.longTouchTimer) {
+          clearTimeout(this.longTouchTimer);
+        }
+      }
+    },
+    touchmove(e) {
+      if (e.touches.length == 1) {
+        let moveX = e.touches[0].pageX - this.initX1;
+        let moveY = e.touches[0].pageY - this.initY1;
+
+        let distance = Math.sqrt(moveX * moveX + moveY * moveY);
+        //如果移动，取消长按计时器
+        if (distance > 20 && this.longTouchTimer) {
+          clearTimeout(this.longTouchTimer);
+        }
+        //如果移动，取消单击计时器
+        if (distance > 20) {
+          this.fullFillSingleClick = false;
+        }
+      }
+    },
+    touchend(e) {
+      //清除长按计时器
+      if (this.longTouchTimer) {
+        clearTimeout(this.longTouchTimer);
+      }
+      //如果满足单击条件，则执行单击
+      if (this.fullFillSingleClick) {
+        this.clickItem();
+      }
     },
   },
 };

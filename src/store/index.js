@@ -8,6 +8,7 @@ const state = {
     token: null, //登录用户token
 }
 
+
 export default new Vuex.Store({
     state,
     mutations,

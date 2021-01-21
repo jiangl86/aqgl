@@ -1,6 +1,10 @@
 <template>
   <div class="aqgg-detail">
-    <yu-form name="公告详情">
+    <yu-form
+      name="公告详情"
+      :dataRight="ggDetail.dataRight"
+      @btnClick="btnClick"
+    >
       <h4>{{ ggDetail.ggName }}</h4>
       <p>{{ ggDetail.ggContent }}</p>
     </yu-form>
@@ -29,6 +33,12 @@ export default {
   methods: {
     transfer() {
       console.log("转发");
+    },
+
+    btnClick(btn) {
+      if (btn.code == "audit") {
+        this.$router.push({ name: "AqggAudit", query: { ggId: this.ggId } });
+      }
     },
   },
 };

@@ -9,7 +9,8 @@
         class="more"
         v-if="pullUpload && scroll && positionY < scroll.maxScrollY - 10"
       >
-        上拉加载更多...
+        <span v-if="isLastPage">没有更多数据了</span>
+        <span v-else>上拉加载更多数据...</span>
       </div>
     </div>
   </div>
@@ -51,12 +52,17 @@ export default {
       type: Boolean,
       default: true, //当快速在屏幕上滑动一段距离的时候，会根据滑动的距离和时间计算出动量，并生成滚动动画。设置为 true 则开启动画
     },
+    isLastPage: {
+      type: Boolean, //是否最后一页
+      default: false,
+    },
   },
   data() {
     return {
       scroll: null,
       positionY: 0,
       positionX: 0,
+      // pullUploadTips: this.isLastPage?"上拉加载更多数据...",
     };
   },
   components: {
@@ -93,6 +99,15 @@ export default {
       this.scroll && this.scroll.finishPullUp();
       this.scroll && this.scroll.refresh();
     },
+
+    // //当已经没有更多数据时，将上拉加载更多提示语修改为“没有数据了”
+    // modidyUploadTips() {
+    //   this.pullUploadTips = "没有更多数据了";
+    // },
+
+    // restoreUploadTips() {
+    //   this.pullUploadTips = "上拉加载更多数据...";
+    // },
   },
   mounted() {
     this.scroll = new BScroll(this.$refs.wrapper, {
