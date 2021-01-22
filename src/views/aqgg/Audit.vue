@@ -1,7 +1,12 @@
 <template>
   <div class="aqgg-audit">
     <yu-form name="公告审批" isEdit>
-      <yu-label-radio name="审批结果" :options="options"></yu-label-radio>
+      <yu-label-radio
+        name="审批结果"
+        :options="options"
+        required
+      ></yu-label-radio>
+      <yu-label-textarea name="备注"></yu-label-textarea>
     </yu-form>
   </div>
 </template>
@@ -9,6 +14,7 @@
 <script>
 import YuForm from "components/content/form/YuForm";
 import YuLabelRadio from "components/content/form/YuLabelRadio";
+import YuLabelTextarea from "components/content/form/YuLabelTextarea";
 export default {
   name: "AqggAudit",
   data() {
@@ -23,6 +29,7 @@ export default {
   components: {
     YuForm,
     YuLabelRadio,
+    YuLabelTextarea,
   },
   created() {
     this.ggId = this.$route.query.ggId;

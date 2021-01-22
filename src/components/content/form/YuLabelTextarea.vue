@@ -1,6 +1,6 @@
 <template>
   <div class="label-textarea">
-    <label @click="clickLabel">{{ name }}</label>
+    <label @click="clickLabel"><span v-if="required">*</span>{{ name }}</label>
     <yu-icon
       v-if="showFold"
       :icon="foldIcon"
@@ -38,6 +38,10 @@ export default {
     name: {
       type: String, //标签名称
       required: true,
+    },
+    required: {
+      type: Boolean, //是否必填项，若为真会标识必填项标识
+      default: false,
     },
     placeholder: "请输入",
     maxlength: {
@@ -125,7 +129,10 @@ label {
   white-space: nowrap;
   overflow: hidden;
 }
-
+label span {
+  color: red;
+  margin-right: 3px;
+}
 .fold {
   position: absolute;
   padding: 8px 10px;

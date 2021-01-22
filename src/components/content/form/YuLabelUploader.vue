@@ -1,6 +1,6 @@
 <template>
   <div class="yu-label-uploader">
-    <label>{{ name }}</label>
+    <label><span v-if="required">*</span>{{ name }}</label>
     <yu-uploader
       :initialFiles="value"
       :previewSize="previewSize"
@@ -28,6 +28,10 @@ export default {
     name: {
       type: String, //标签名称
       required: true,
+    },
+    required: {
+      type: Boolean, //是否必填项，若为真会标识必填项标识
+      default: false,
     },
     readonly: {
       type: Boolean, //控件是否只读
@@ -128,6 +132,10 @@ label {
   align-self: flex-start;
   white-space: nowrap;
   overflow: hidden;
+}
+label span {
+  color: red;
+  margin-right: 3px;
 }
 .yu-uploader {
   flex: 1;

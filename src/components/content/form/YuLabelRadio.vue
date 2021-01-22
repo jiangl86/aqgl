@@ -1,6 +1,6 @@
 <template>
   <div class="label-radio">
-    <label>{{ name }}</label>
+    <label><span v-if="required">*</span>{{ name }}</label>
     <yu-radio-group
       :options="options"
       :initialSelected="initialSelected"
@@ -22,6 +22,10 @@ export default {
       type: String, //标签名称
       required: true,
     },
+    required: {
+      type: Boolean, //是否必填项，若为真会标识必填项标识
+      default: false,
+    },
     options: {
       type: Array, //选项数组,每一选项信息：选项,如果 options 中的项为字符串，此时默认 label 和 value 的值都为该字符串的值。如果为object,则可配置label（复选框显示文字），value复选框的值，disabled
       required: true,
@@ -31,7 +35,7 @@ export default {
     },
     horizontal: {
       type: Boolean,
-      default: true, //是否水平排列
+      default: false, //是否水平排列
     },
     colNum: {
       type: Number,
@@ -77,6 +81,10 @@ label {
   align-self: flex-start;
   white-space: nowrap;
   overflow: hidden;
+}
+label span {
+  color: red;
+  margin-right: 3px;
 }
 .yu-radio-group {
   flex: 1;

@@ -5,8 +5,16 @@
       :dataRight="ggDetail.dataRight"
       @btnClick="btnClick"
     >
-      <h4>{{ ggDetail.ggName }}</h4>
-      <p>{{ ggDetail.ggContent }}</p>
+      <div class="detail-info">
+        <div class="title">
+          <h4>{{ ggDetail.ggName }}</h4>
+          <span></span>
+        </div>
+        <div class="content">
+          <p>{{ ggDetail.ggContent }}</p>
+        </div>
+        <div class="files"></div>
+      </div>
     </yu-form>
   </div>
 </template>
@@ -45,6 +53,9 @@ export default {
 </script>
 
 <style scoped>
+.detail-info {
+  padding: 0 10px;
+}
 h4 {
   font-size: var(--font-size-md);
   font-weight: 600;

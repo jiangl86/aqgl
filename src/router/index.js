@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import aqggRoutes from './aqggRoutes'
+import zzjgRoutes from './zzjgRoutes'
 
 Vue.use(VueRouter)
 
@@ -68,6 +69,7 @@ const routes = [{
     },
 
     ...aqggRoutes,
+    ...zzjgRoutes,
     {
         path: '/test',
         name: 'Test',

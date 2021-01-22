@@ -217,7 +217,6 @@ export default {
 .scroll {
   margin-top: 44px;
   width: 100vw;
-  padding: 0 10px;
   box-sizing: border-box;
 }
 .bottom-func {

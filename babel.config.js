@@ -5,6 +5,9 @@ module.exports = {
     // "presets": [
     //     ["es2015", { "modules": false }]
     // ],
+    // presets: [
+    //     ['@vue/app', { 'useBuiltIns': 'entry', polyfills: ['es6.promise', 'es6.symbol'] }]
+    // ],
     "presets": [
         ["@babel/preset-env", { "modules": false }]
     ],

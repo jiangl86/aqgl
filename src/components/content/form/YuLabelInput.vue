@@ -1,6 +1,6 @@
 <template>
   <div class="label-input">
-    <label @click="clickLabel">{{ name }}</label>
+    <label @click="clickLabel"><span v-if="required">*</span>{{ name }}</label>
     <yu-input
       :placeholder="placeholder"
       :type="type"
@@ -28,6 +28,10 @@ export default {
     name: {
       type: String, //标签名称
       required: true,
+    },
+    required: {
+      type: Boolean, //是否必填项，若为真会标识必填项标识
+      default: false,
     },
     placeholder: "",
     type: {
@@ -109,6 +113,10 @@ label {
   align-self: flex-start;
   white-space: nowrap;
   overflow: hidden;
+}
+label span {
+  color: red;
+  margin-right: 3px;
 }
 .yu-input {
   flex: 1;

@@ -49,5 +49,13 @@ export default {
 };
 </script>
 
-<style scoped>
+<style >
+.cube-radio-wrap {
+  text-align: left !important;
+  justify-content: flex-start !important;
+}
+.cube-radio-group[data-horz="true"]::after,
+.cube-radio-group[data-col="true"]::after {
+  border: none !important;
+}
 </style>

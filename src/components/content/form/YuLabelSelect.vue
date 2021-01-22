@@ -1,6 +1,6 @@
 <template>
   <div class="yu-label-select">
-    <label>{{ name }}</label>
+    <label><span v-if="required">*</span>{{ name }}</label>
     <yu-icon
       v-if="showFold"
       :icon="foldIcon"
@@ -64,6 +64,10 @@ export default {
   name: "YuLabelSelect",
   props: {
     name: "", //标签名称
+    required: {
+      type: Boolean, //是否必填项，若为真会标识必填项标识
+      default: false,
+    },
     canInput: {
       type: Boolean,
       default: true,
@@ -309,7 +313,10 @@ label {
   white-space: nowrap;
   overflow: hidden;
 }
-
+label span {
+  color: red;
+  margin-right: 3px;
+}
 .fold {
   position: absolute;
   padding: 8px 10px;

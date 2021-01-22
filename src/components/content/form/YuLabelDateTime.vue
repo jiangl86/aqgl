@@ -1,6 +1,6 @@
 <template>
   <div class="yu-label-date-time">
-    <label>{{ name }}</label>
+    <label><span v-if="required">*</span>{{ name }}</label>
     <div class="content">
       <input
         type="text"
@@ -110,7 +110,10 @@ export default {
       type: String, //标签名称
       required: true,
     },
-
+    required: {
+      type: Boolean, //是否必填项，若为真会标识必填项标识
+      default: false,
+    },
     type: {
       type: String,
       default: "date", //日期选择类型，date选择单个日期，dateRange选择日期范围，datetime选择单个日期及具体时间，datetimeRange选择具体日期时间范围
@@ -398,6 +401,10 @@ label {
   align-self: flex-start;
   white-space: nowrap;
   overflow: hidden;
+}
+label span {
+  color: red;
+  margin-right: 3px;
 }
 .content {
   position: relative;
