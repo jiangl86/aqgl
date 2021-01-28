@@ -670,12 +670,15 @@ export default {
       for (let i = this.selected.length - 1; i >= 0; i--) {
         let j = 0;
         let ele = this.selected[i];
-        for (; j < this.initialSelect.length; j++) {
-          if (ele.id == this.initialSelect[j].id) {
-            break;
+        if (this.initialSelect) {
+          for (; j < this.initialSelect.length; j++) {
+            if (ele.id == this.initialSelect[j].id) {
+              break;
+            }
           }
-        }
-        if (j == this.initialSelect.length) {
+          if (j == this.initialSelect.length) {
+          }
+        } else {
           ele.selected = false;
           this.selected.splice(i, 1);
         }
